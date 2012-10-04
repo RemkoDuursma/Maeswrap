@@ -1,0 +1,25 @@
+\name{checkwatbal}
+\alias{checkwatbal}
+\title{
+Checks MAESPA water balance
+}
+\description{
+Adds up fluxes for the soil water balance calculated by MAESPA. Prints the total fluxes (precipitation, transpiration,
+canopy interception, and so on), and the difference between ingoing and outgoing. This is a debugging/checking tool:
+if the model has serious problems, there will be a missing sink or source.
+}
+\usage{
+checkwatbal(x = readwatbal(), usemeaset = FALSE)
+}
+\arguments{
+  \item{x}{A dataframe returned by \code{\link{readwatbal}}.}
+  \item{usemeaset}{Whether to use measured ET from the met file, or simulated (Default).}
+}
+\author{
+Remko Duursma
+}
+\seealso{
+\code{\link{readwatbal}}
+}
+\keyword{misc}
+

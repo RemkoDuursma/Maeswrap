@@ -1,0 +1,6 @@
+parname	fileparname	filename	namelist
+
+vcmax	values		phy.dat 	vcmax
+jmax	values		phy.dat		jmax
+notrees notrees 	trees.dat 	plot 
+hcb	values 		trees.dat 	indivhttrunk

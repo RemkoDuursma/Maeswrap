@@ -1,0 +1,1 @@
+revchar <- function(x){if(length(x) > 1){    rev.default(x) } else {paste(rev.default(strsplit(x,"")[[1]]),collapse="")}}
