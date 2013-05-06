@@ -17,7 +17,6 @@ printme(x, SEP=" ")
 }
 \arguments{
   \item{x}{A string, or a character vector}
-  \item{str}{Also a string}
   \item{...}{A file name}
   \item{SEP}{Separator in printing the namelist}
 }

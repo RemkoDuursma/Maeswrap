@@ -20,9 +20,8 @@ function(datfile, parname, namelist=NA,fail=TRUE){
         return(NA)
 		}
 		
-    
     # Find nearest namelist closer ("/")
-		endnml <- grep("/", dat_lines)
+		endnml <- grep("^/$", dat_lines)
     nmllen <- min(endnml[endnml > namelist_loc] - namelist_loc)
 		datlines_namelist <- dat_lines[namelist_loc:(namelist_loc + nmllen)]
     
@@ -31,7 +30,7 @@ function(datfile, parname, namelist=NA,fail=TRUE){
 		# if values separated by /n, here separate elements of the vector!
 		parloc <- grep(parname, datlines_namelist) #+ namelist_loc - 1
 
-		if(length(parloc)==0){
+    if(length(parloc)==0){
 			if(fail)
         stop(paste("Cannot find",parname,"in",datfile,"in the namelist",namelist,"\n"))
 			else
@@ -65,7 +64,6 @@ function(datfile, parname, namelist=NA,fail=TRUE){
     parloc <- grep(paste0(parname,"$"), parNames)
     
 		parloc <- grep(parname, dat_lines)
-    
 		if(length(parloc)==0){
 			if(fail)
         stop("Cannot find ",parname," in ",datfile)
