@@ -37,6 +37,14 @@ function(datfile, parname, namelist=NA,fail=TRUE){
         return(NA)
 		}
 
+    
+    nmlsubs <- datlines_namelist[parloc:(length(datlines_namelist)-1)]
+    parl <- grep("=", nmlsubs)
+    if(length(parl) > 1)nmlpar <- nmlsubs[1:(parl[2]-1)]
+    
+    
+    
+    
 		# paste everything starting from the parname to end of namelist into a string
 		parvalues <- paste(datlines_namelist[parloc:(length(datlines_namelist)-1)], collapse="\t")
 		
@@ -47,11 +55,10 @@ function(datfile, parname, namelist=NA,fail=TRUE){
 		# Further splitting by " " for values (partially) in one row.
 		s2 <- delempty(unlist(strsplit(s2, " ")))
 	
-		options(warn=-1)
-		val <- as.numeric(s2)
-		if(all(is.na(val)))val <- s2
-		val <- val[!is.na(val)]
-		options(warn=0)
+    browser()
+    
+    val <- trynumeric(s2)
+    
 	}
 
 	# only parameter name provided
@@ -75,10 +82,8 @@ function(datfile, parname, namelist=NA,fail=TRUE){
     parloc <- parLocs[parloc]
     
 		s <- strsplit(dat_lines[parloc], "=")[[1]]
-		options(warn=-1)
-		val <- as.numeric(s[length(s)])
-		if(all(is.na(val)))val <- s[length(s)]
-		options(warn=0)
+
+    val <- trynumeric(s[length(s)])
 	}
 	
 return(val)

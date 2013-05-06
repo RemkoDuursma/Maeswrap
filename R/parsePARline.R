@@ -1,30 +1,6 @@
-readallPAR <- function(fn){
-  
-  r <- str_trim(readLines(fn))
-  
-  nml <- grep("^&",r)
-  
-  s <- r[nml[1]:length(r)]
-  
-}
-
-
-readNameList <- function(fn, namelist){
-  
-  r <- str_trim(readLines(fn))
-  
-  nmStart <- grep(paste0("&",namelist), r, ignore.case=TRUE)
-  r <- r[nmStart[1]:length(r)]
-  r <- r[1:grep("/",r)[1]]
-  r <- r[-c(1,length(r))]
-  
-}
-  
-
-
 
 parsePARline <- function(s){
-
+  
   if(length(s) > 1)s <- paste(s, collapse= " ")
   
   sp <- strsplit(s, "=")[[1]]
@@ -36,7 +12,7 @@ parsePARline <- function(s){
   # Single numeric
   tp <- trynumeric(parval)
   if(is.numeric(tp))return(tp)
-    
+  
   # Not returned yet - try splitting
   spl <- strsplit(parval, " ")[[1]]
   
@@ -55,39 +31,3 @@ parsePARline <- function(s){
   
   return(parval)
 }
-
-
-
-
-x <- c("fracroot = 0.31 0.22 0.15 0.11 0.073", "0.051 0.036 0.025","0.017 0.012")
-parsePARline(x)
-
-x <- "somepar = 100"
-parsePARline(x)
-
-x <- "longcharpar = 'a' 'b' 'c'"
-parsePARline(x)
-
-x <- "shortcharpar = 'helloooo'"
-parsePARline(x)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
