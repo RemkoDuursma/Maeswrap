@@ -23,7 +23,7 @@ crownshape=c("cone","ellipsoid","round",
 	"halfellipsoid","paraboloid","cylinder"), 
 readstrfiles=TRUE,targethighlight=TRUE,
 addNarrow=TRUE, xyaxes=TRUE,labcex=1,axiscex=1,
-verbose=FALSE,...)
+verbose=FALSE,idate=1,...)
 Openstand(treesfile="trees.dat")
 plottree(crownshape=c("cone","elipsoid","ellipsoid","round",
 	"halfellipsoid","paraboloid","cylinder"), 
@@ -56,6 +56,7 @@ coord3dshape(crownshape=c("cone","ellipsoid","halfellipsoid",
   \item{nz}{Number of z divisions (increase number to get smoother crowns).}
   \item{nalpha}{Number of angular divisions (increase number to get smoother crowns).}
   \item{m}{3xN matrix (x,y,z coordinates in rows).}
+  \item{idate}{If multiple dates are provided for tree size variables, which one to display.}
   \item{\dots}{Further parameters passed (to plottree, or triangles3d).}
 }
 \value{
