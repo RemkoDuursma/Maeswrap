@@ -2,7 +2,7 @@
 function(datfile, parname, namelist=NA,fail=TRUE){
 
 	# read the file
-	dat_lines <- str_trim(tolower(readLines(datfile)))
+	datlines <- str_trim(tolower(readLines(datfile)))
 	
   # regexp
   parreg <- paste0("^", tolower(parname), "[[:blank:]]+=")
@@ -14,7 +14,7 @@ function(datfile, parname, namelist=NA,fail=TRUE){
 	if(!is.na(namelist)){
 
 		nl <- paste0("&", namelist, "$")
-		namelist_loc <- grep(nl, dat_lines)
+		namelist_loc <- grep(nl, datlines)
 		if(length(namelist_loc)==0){
 			if(fail)
         stop("Can't find namelist ", namelist)
@@ -23,9 +23,9 @@ function(datfile, parname, namelist=NA,fail=TRUE){
 		}
 		
     # Find nearest namelist closer ("/")
-		endnml <- grep("^/$", dat_lines)
+		endnml <- grep("^/$", datlines)
     nmllen <- min(endnml[endnml > namelist_loc] - namelist_loc)
-		datlines_namelist <- dat_lines[namelist_loc:(namelist_loc + nmllen)]
+		datlines_namelist <- datlines[namelist_loc:(namelist_loc + nmllen)]
     
   
 		# nth element of the namelist
@@ -57,7 +57,7 @@ function(datfile, parname, namelist=NA,fail=TRUE){
 	# only parameter name provided
 	if(is.na(namelist)){
     
-    parloc <- grep(parreg, dat_lines)
+    parloc <- grep(parreg, datlines)
     
 		if(length(parloc)==0){
 			if(fail)
@@ -66,7 +66,7 @@ function(datfile, parname, namelist=NA,fail=TRUE){
         return(NA)
 		}
     
-    nmlsubs <- dat_lines[parloc:(length(dat_lines)-1)]
+    nmlsubs <- datlines[parloc:(length(datlines)-1)]
     parl <- grep("=", nmlsubs)
     if(length(parl) > 1)nmlpar <- nmlsubs[1:(parl[2]-1)]
     val <- parsePARline(nmlpar)
