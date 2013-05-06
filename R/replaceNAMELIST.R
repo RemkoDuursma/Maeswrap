@@ -3,7 +3,7 @@ function(namelist=NA,
 		 datfile=NA, 
 		 vals=list()){
     
-    if(is.na(datfile))datfile <- file.choose()
+    if(is.na(datfile))stop("Must provide name of the .dat file.")
     
     # Find NAMELIST and end of it ("/")
     datfile_lines <- tolower(readLines(datfile))
