@@ -1,11 +1,9 @@
 Openstand <- function(treesfile="trees.dat"){
 
-    options(show.error.messages=FALSE)
-    x0 <- try(readPAR(treesfile,"x0","plot"))
-    y0 <- try(readPAR(treesfile,"y0","plot"))
-    if(inherits(x0, "try-error"))x0 <- 0
-    if(inherits(y0, "try-error"))y0 <- 0
-    options(show.error.messages=TRUE)
+    x0 <- readPAR(treesfile,"x0","plot",fail=FALSE)
+    y0 <- readPAR(treesfile,"y0","plot",fail=FALSE)
+    if(is.na(x0))x0 <- 0
+    if(is.na(y0))y0 <- 0
     
     xmax <- readPAR(treesfile,"xmax","plot")
     ymax <- readPAR(treesfile,"ymax","plot")

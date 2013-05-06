@@ -20,6 +20,11 @@ coord3dshape <- function(crownshape=c("cone","ellipsoid","halfellipsoid","parabo
 	y <- y0 + r*distfun*sin(angs)
 	z <- z0 + z*CL
 	
+  keep <- !duplicated(cbind(x,y,z))
+  x <- x[keep]
+  y <- y[keep]
+  z <- z[keep]
+  
 return(matrix(cbind(x,y,z),ncol=3))
 }
 

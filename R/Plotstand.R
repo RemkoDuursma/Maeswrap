@@ -1,9 +1,15 @@
 Plotstand <- function(treesfile="trees.dat", 
-				      strfile="str.dat",
-					  crownshape=c("cone","ellipsoid","round","halfellipsoid","paraboloid","cylinder"), 
-					  readstrfiles=TRUE,
-					  targethighlight=TRUE,
-					  addNarrow=TRUE, xyaxes=TRUE,labcex=1,axiscex=1,verbose=FALSE,...){
+          				    strfile="str.dat",
+          					  crownshape=c("cone","ellipsoid","round","halfellipsoid","paraboloid","cylinder"), 
+          					  readstrfiles=TRUE,
+          					  targethighlight=TRUE,
+          					  addNarrow=TRUE, 
+                      xyaxes=TRUE,
+                      labcex=1,
+                      axiscex=1,
+                      verbose=FALSE,
+                      idate=1,
+                      ...){
 
 
 	notrees <- readPAR(treesfile, "notrees", "plot")
@@ -27,15 +33,13 @@ Plotstand <- function(treesfile="trees.dat",
 	}
 	
 	if(!haveconfile){
-		# warning("Guessing str file is str.dat\n")
 		strfiles <- strfile
 	} else {
 		strfiles <- readPAR("confile.dat","strfiles","species",fail=FALSE)
 		if(all(is.na(strfiles)))
 			strfiles <- strfile
 		else {
-			# x <- strsplit(strfiles," ")
-			strfiles <- gsub("'","",strfiles) #delempty(x[[1]]))
+			strfiles <- gsub("'","",strfiles)
 		}
 		if(!all(file.exists(strfiles)))
 			stop("Not all strfiles are in the current working directory.")
@@ -43,45 +47,65 @@ Plotstand <- function(treesfile="trees.dat",
 	
 	if(readstrfiles){
 		species <- readPAR("trees.dat","ispecies","speclist",fail=FALSE)
-		if(all(is.na(species))){
-            species <- rep(1,notrees)
-        }
-        #stop("Species namelist not found!")
+		if(all(is.na(species)))
+      species <- rep(1,notrees)
+    
 		for(i in 1:notrees){
 			crownshapes[i] <- tolower(readPAR(strfiles[species[i]],"cshape","canopy"))
-		}
+	  }
 		crownshapes <- gsub("'","",crownshapes)
 	
 	} else crownshapes[] <- match.arg(crownshape)  
 	
-    xycoor <- try(readPAR(treesfile, "xycoords", "xy"),silent=TRUE)
-	if(inherits(xycoor, "try-error"))stop("XY coordinates must be present in trees.dat file")
-    X <- xycoor[seq(1,length(xycoor),by=2)]
-    Y <- xycoor[seq(2,length(xycoor),by=2)]
+
+  xycoor <- readPAR(treesfile, "xycoords", "xy", fail=FALSE)
+  if(all(is.na(xycoor)))stop("XY coordinates must be present in trees.dat file")
+  xycoor <- matrix(xycoor,ncol=2,byrow=TRUE)
+  X <- xycoor[,1]
+  Y <- xycoor[,2]
+  
+  Bearing <- readPAR(treesfile, "bearing", "plot")
+  
+  # varname w/o 'indiv' or 'all'!
+  readVar <- function(varname, idate=1){
     
-	Bearing <- readPAR(treesfile, "bearing", "plot")
-	    
-    radx <- try(readPAR(treesfile, "values", "indivradx"),silent=TRUE)
-    if(inherits(radx, "try-error"))radx <- rep(readPAR(treesfile, "values", "allradx")[1], notrees)
-    CW <- 2 * radx
-
-    CL <- try(readPAR(treesfile, "values", "indivhtcrown"),silent=TRUE)
-    if(inherits(CL, "try-error"))CL <- rep(readPAR(treesfile, "values", "allhtcrown")[1], notrees)
+    indvar <- paste0("indiv",varname)
+    allvar <- paste0("all",varname)
     
-    DBH <- try(readPAR(treesfile, "values", "indivdiam"),silent=TRUE)
-    if(inherits(DBH, "try-error"))DBH <- rep(readPAR(treesfile, "values", "alldiam")[1], notrees)
-    if(max(DBH) > 3)DBH <- 0.01 * DBH
-
-    HCB <- try(readPAR(treesfile, "values", "indivhttrunk"),silent=TRUE)
-    if(inherits(HCB, "try-error"))HCB <- rep(readPAR(treesfile, "values", "allhttrunk")[1], notrees)
-
-	Openstand(treesfile)
-	
-    for(i in 1:notrees){
-		if(verbose)message("Plotting tree number : ", i)
-        plottree(crownshape=crownshapes[i], CL=CL[i], CW=CW[i], 
-            HCB=HCB[i], X=X[i], Y=Y[i], dbh=DBH[i], crowncolor=crowncolors[i]) #,...)
+    vals <- readPAR(treesfile, "values", indvar,fail=FALSE)
+    whichvar <- indvar
+    
+    if(all(is.na(vals))){
+      vals <- rep(readPAR(treesfile, "values", allvar)[1], notrees)
+      whichvar <- allvar
     }
+      
+    # dates?
+    ndates <- readPAR(treesfile, "nodates", whichvar)
+    if(all(is.na(ndates)) || ndates==1)return(vals)
+    
+    # else...
+    vals <- matrix(vals, ncol=ndates, byrow=TRUE)
+    return(vals[,idate])
+  }
+  
+  radx <- readVar("radx", idate) 
+  CW <- 2*radx
+     
+  CL <- readVar("htcrown", idate)
+	DBH <- readVar("diam", idate)
+	if(max(DBH) > 3)DBH <- 0.01 * DBH
+  
+  HCB <- readVar("httrunk", idate)
+  
+  Openstand(treesfile)
+
+  for(i in 1:notrees){
+	if(verbose)message("Plotting tree number : ", i)
+      plottree(crownshape=crownshapes[i], CL=CL[i], CW=CW[i], 
+          HCB=HCB[i], X=X[i], Y=Y[i], dbh=DBH[i], crowncolor=crowncolors[i])
+  }
+     
 	if(addNarrow){
 		X0 <- readPAR(treesfile,"x0","plot", fail=FALSE)
 		if(is.na(X0))X0 <- 0
@@ -92,7 +116,7 @@ Plotstand <- function(treesfile="trees.dat",
 		Ymax <- readPAR(treesfile,"ymax","plot")
 		addarrow(x0=X0 + 0.1*Xmax,y0=Y0 + 0.1*Ymax,
 			 len=0.1*(Ymax-X0),bearing=Bearing)
-   }
+  }
 	if(xyaxes){
 		par3d(cex=axiscex)
 		axes3d(c('x-','y-'))
