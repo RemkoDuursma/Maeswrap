@@ -3,7 +3,7 @@
 \alias{maybeQuote}
 \alias{mayberead}
 \alias{printme}
-\
+
 \title{Utility functions}
 \description{
 Several simple functions for handling strings etc.
