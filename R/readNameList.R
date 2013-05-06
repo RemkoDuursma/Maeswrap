@@ -1,5 +1,5 @@
 
-readNameList <- function(fn, namelist, tolowerNames=FALSE){
+readNameList <- function(fn, namelist){
   
   r <- str_trim(readLines(fn))
   

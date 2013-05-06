@@ -40,7 +40,10 @@ function(datfile, parname, namelist=NA,fail=TRUE){
     
     nmlsubs <- datlines_namelist[parloc:(length(datlines_namelist)-1)]
     parl <- grep("=", nmlsubs)
-    if(length(parl) > 1)nmlpar <- nmlsubs[1:(parl[2]-1)]
+    if(length(parl) > 1)
+      nmlpar <- nmlsubs[1:(parl[2]-1)]
+    else
+      nmlpar <- nmlsubs[parl]
     
     val <- parsePARline(nmlpar)
     
