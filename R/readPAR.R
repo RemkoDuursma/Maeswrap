@@ -42,22 +42,7 @@ function(datfile, parname, namelist=NA,fail=TRUE){
     parl <- grep("=", nmlsubs)
     if(length(parl) > 1)nmlpar <- nmlsubs[1:(parl[2]-1)]
     
-    
-    
-    
-		# paste everything starting from the parname to end of namelist into a string
-		parvalues <- paste(datlines_namelist[parloc:(length(datlines_namelist)-1)], collapse="\t")
-		
-		# split by "=", and then by "\t"
-		s <- strsplit(str_trim(parvalues), "=")[[1]][2]
-		s2 <- delempty(strsplit(s, "\t")[[1]])
-		
-		# Further splitting by " " for values (partially) in one row.
-		s2 <- delempty(unlist(strsplit(s2, " ")))
-	
-    browser()
-    
-    val <- trynumeric(s2)
+    val <- parsePARline(nmlpar)
     
 	}
 
@@ -69,8 +54,7 @@ function(datfile, parname, namelist=NA,fail=TRUE){
     parNames <- str_trim(sapply(parNames, "[", 1))
     
     parloc <- grep(paste0(parname,"$"), parNames)
-    
-		parloc <- grep(parname, dat_lines)
+  
 		if(length(parloc)==0){
 			if(fail)
         stop("Cannot find ",parname," in ",datfile)
@@ -81,9 +65,11 @@ function(datfile, parname, namelist=NA,fail=TRUE){
     # convert to original line number
     parloc <- parLocs[parloc]
     
-		s <- strsplit(dat_lines[parloc], "=")[[1]]
-
-    val <- trynumeric(s[length(s)])
+    nmlsubs <- dat_lines[parloc:(length(dat_lines)-1)]
+    parl <- grep("=", nmlsubs)
+    if(length(parl) > 1)nmlpar <- nmlsubs[1:(parl[2]-1)]
+    val <- parsePARline(nmlpar)
+    
 	}
 	
 return(val)
