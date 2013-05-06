@@ -1,5 +1,4 @@
-`replaceNAMELIST` <-
-function(namelist=NA, 
+replaceNameList <- function(namelist=NA, 
 		 datfile=NA, 
 		 vals=list()){
     

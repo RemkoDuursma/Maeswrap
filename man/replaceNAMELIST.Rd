@@ -1,5 +1,5 @@
-\name{replaceNAMELIST}
-\alias{replaceNAMELIST}
+\name{replaceNameList}
+\alias{replaceNameList}
 \title{ Replaces a namelist.}
 \description{
   Replaces the whole namelist in an input file. All parameters in the namelist must be provided, otherwise
