@@ -7,7 +7,7 @@ replacemetvar <- function(replacevar, newvalues, oldmetfile="met.dat", newmetfil
     namesloc <- setdiff(namesloc, grep("nocolumns", metlines))
     namesline <- metlines[namesloc]
     sp <- strsplit(namesline, "=")[[1]][2]
-    NAMES <- delempty(trim(strsplit(sp, "\t")[[1]]))
+    NAMES <- delempty(strsplit(sp, "\t")[[1]])
     NAMES <- gsub("'", "", NAMES)
     NAMES <- do.call("c", strsplit(NAMES, " ", fixed = TRUE))
     names(DATA) <- NAMES

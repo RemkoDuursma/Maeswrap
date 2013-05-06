@@ -10,13 +10,13 @@ function(namelist=NA,
 	namelist <- tolower(namelist)
 	
     namelist_loc <- length(datfile_lines)
-    for(i in 1:length(datfile_lines))if(Maeswrap::trim(datfile_lines[i]) == paste("&",namelist,sep=""))namelist_loc <- i
+    for(i in 1:length(datfile_lines))if(str_trim(datfile_lines[i]) == paste("&",namelist,sep=""))namelist_loc <- i
         
     namelist_end <- NA
     k <- namelist_loc
     if(!(namelist_loc == length(datfile_lines))){
         while(is.na(namelist_end)){
-         if(Maeswrap::trim(datfile_lines[k]) == "/")namelist_end <- k
+         if(str_trim(datfile_lines[k]) == "/")namelist_end <- k
          k <- k + 1
         }
         # Part of original file before and after this namelist.

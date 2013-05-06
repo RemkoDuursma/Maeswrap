@@ -2,8 +2,8 @@
 function(datfile, parname, namelist=NA,fail=TRUE){
 
 	# read the file
-	dat_lines <- tolower(readLines(datfile))
-	parname <- paste("^", tolower(parname),sep="")
+	dat_lines <- str_trim(tolower(readLines(datfile)))
+	parname <- paste0("^", tolower(parname))
 	if(!is.na(namelist))namelist <- tolower(namelist)
 
 	# If namelist is not NA, find the parameter within some namelist.
@@ -11,35 +11,38 @@ function(datfile, parname, namelist=NA,fail=TRUE){
 	namelist_loc <- 0
 	if(!is.na(namelist)){
 
-		nl <- paste("&", namelist, "$", sep="")
-		namelist_loc <- grep(nl, trim(dat_lines))
+		nl <- paste0("&", namelist, "$")
+		namelist_loc <- grep(nl, dat_lines)
 		if(length(namelist_loc)==0){
-			if(fail)stop("Can't find namelist\n")
-			if(!fail)return(NA)
+			if(fail)
+        stop("Can't find namelist\n")
+			else
+        return(NA)
 		}
 		
-		namelist_end <- NA
-		k <- 1
-		while(is.na(namelist_end)){
-         if(Maeswrap::trim(dat_lines[namelist_loc + k]) == "/")namelist_end <- k
-         k <- k + 1
-        }
-		datlines_namelist <- tolower(dat_lines[namelist_loc:(namelist_loc + namelist_end)])
-
+    
+    # Find nearest namelist closer ("/")
+		endnml <- grep("/", dat_lines)
+    nmllen <- min(endnml[endnml > namelist_loc] - namelist_loc)
+		datlines_namelist <- dat_lines[namelist_loc:(namelist_loc + nmllen)]
+    
+  
 		# nth element of the namelist
 		# if values separated by /n, here separate elements of the vector!
-		parloc <- grep(tolower(parname), trim(datlines_namelist)) #+ namelist_loc - 1
+		parloc <- grep(parname, datlines_namelist) #+ namelist_loc - 1
 
 		if(length(parloc)==0){
-			if(fail)stop(paste("Cannot find",parname,"in",datfile,"in the namelist",namelist,"\n"))
-			if(!fail)return(NA)
+			if(fail)
+        stop(paste("Cannot find",parname,"in",datfile,"in the namelist",namelist,"\n"))
+			else
+        return(NA)
 		}
 
 		# paste everything starting from the parname to end of namelist into a string
 		parvalues <- paste(datlines_namelist[parloc:(length(datlines_namelist)-1)], collapse="\t")
 		
 		# split by "=", and then by "\t"
-		s <- strsplit(Maeswrap::trim(parvalues), "=")[[1]][2]
+		s <- strsplit(str_trim(parvalues), "=")[[1]][2]
 		s2 <- delempty(strsplit(s, "\t")[[1]])
 		
 		# Further splitting by " " for values (partially) in one row.
@@ -54,12 +57,26 @@ function(datfile, parname, namelist=NA,fail=TRUE){
 
 	# only parameter name provided
 	if(is.na(namelist)){
-		parloc <- grep(paste(parname,"$",sep=""), trim(dat_lines))
+    
+    parLocs <- grep("=",dat_lines)
+    parNames <- strsplit(dat_lines[parLocs],"=")
+    parNames <- str_trim(sapply(parNames, "[", 1))
+    
+    parloc <- grep(paste0(parname,"$"), parNames)
+    
+		parloc <- grep(parname, dat_lines)
+    
 		if(length(parloc)==0){
-			if(fail)stop(paste("Cannot find",parname,"in",datfile,"\n"))
-			if(!fail)return(NA)
+			if(fail)
+        stop("Cannot find ",parname," in ",datfile)
+			else
+        return(NA)
 		}
-		s <- strsplit(Maeswrap::trim(dat_lines[parloc]), "=")[[1]]
+    
+    # convert to original line number
+    parloc <- parLocs[parloc]
+    
+		s <- strsplit(dat_lines[parloc], "=")[[1]]
 		options(warn=-1)
 		val <- as.numeric(s[length(s)])
 		if(all(is.na(val)))val <- s[length(s)]

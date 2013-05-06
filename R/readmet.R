@@ -8,7 +8,7 @@ function(filename="met.dat", nlines=-1){
 	namesline <- metlines[namesloc]
 	datastart <- grep("DATA STARTS", metlines)
 	sp <- strsplit(namesline, "=")[[1]][2]
-	NAMES <- delempty(trim(strsplit(sp, "\t")[[1]]))
+	NAMES <- delempty(str_trim(strsplit(sp, "\t")[[1]]))
 	NAMES <- gsub("'", "", NAMES)
 	NAMES <- do.call("c", strsplit(NAMES, " ", fixed=TRUE))
 	metdata <- read.table(filename, header=FALSE, skip=datastart, nrows=nlines)

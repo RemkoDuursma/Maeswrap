@@ -13,14 +13,14 @@ function(datfile, parname, namelist=NA, newval, noquotes=FALSE){
 		
 		#namelist_loc <- grep(nl, dat_lines)
 		# '$' makes sure namelist matches more exactly (reg. exp.).
-		namelist_loc <- grep(paste(nl, "$", sep=""), Maeswrap::trim(tolower(dat_lines)))
+		namelist_loc <- grep(paste(nl, "$", sep=""), str_trim(tolower(dat_lines)))
 
 		if(length(namelist_loc)==0)stop(paste("Cannot find namelist",toupper(namelist) ))
 		
 		namelist_end <- NA
 		k <- 1
 		while(is.na(namelist_end)){
-         if(Maeswrap::trim(dat_lines[namelist_loc + k]) == "/")namelist_end <- k
+         if(str_trim(dat_lines[namelist_loc + k]) == "/")namelist_end <- k
          k <- k + 1
         }
 		datlines_namelist <- dat_lines[namelist_loc:(namelist_loc + namelist_end)]
@@ -29,10 +29,10 @@ function(datfile, parname, namelist=NA, newval, noquotes=FALSE){
 
     # Find the parameter.
     if(!is.na(namelist)){
-		parloc <- grep(paste("^",parname,sep=""), trim(tolower(datlines_namelist))) + namelist_loc - 1
+		parloc <- grep(paste("^",parname,sep=""), str_trim(tolower(datlines_namelist))) + namelist_loc - 1
 		if(length(parloc) > 1)stop("Multiple entries of ", parname)
 	} else {
-		parloc <- grep(paste("^",parname,sep=""), trim(tolower(dat_lines)))
+		parloc <- grep(paste("^",parname,sep=""), str_trim(tolower(dat_lines)))
 		if(length(parloc) > 1)stop("Multiple entries of ", parname)
 	}
 	
