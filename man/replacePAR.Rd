@@ -25,7 +25,7 @@ WARNING : The input file is modified. Make sure to backup your original input fi
 Nothing is returned. The inputfile is modified.
 }
 \author{ Remko Duursma}
-\seealso{ \code{\link{replaceNAMELIST}}, \code{\link{readPAR}}  }
+\seealso{ \code{\link{replaceNameList}}, \code{\link{readPAR}}  }
 \examples{
 
 \dontrun{

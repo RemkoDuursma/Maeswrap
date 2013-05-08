@@ -5,7 +5,7 @@
 \title{Bundle of functions for modifying MAESTRA/MAESPA input files, and reading output files.}
 \description{
 The main functions are \code{\link{runmaespa}} and \code{\link{maesparunall}}, see their help pages.
-Functions that read parameters, and modify parameters or whole namelists are \code{\link{readPAR}}, \code{\link{replacePAR}} and \code{\link{replaceNAMELIST}}. 
+Functions that read parameters, and modify parameters or whole namelists are \code{\link{readPAR}}, \code{\link{replacePAR}}, \code{\link{replaceNameList}}, and \code{\link{parseFile}} to read an entire file.
 Functions that read output are \code{\link{readdayflux}}, \code{\link{readhrflux}}
 }
 \details{
