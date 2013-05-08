@@ -1,7 +1,4 @@
-`replaceNAMELIST` <-
-function(namelist=NA, 
-		 datfile=NA, 
-		 vals=list()){
+replaceNameList <- function(namelist=NA, datfile=NA, vals=list()){
     
     if(is.na(datfile))stop("Must provide name of the .dat file.")
     

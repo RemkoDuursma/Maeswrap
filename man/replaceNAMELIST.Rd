@@ -1,12 +1,13 @@
-\name{replaceNAMELIST}
+\name{replaceNameList}
+\alias{replaceNameList}
 \alias{replaceNAMELIST}
-\title{ Replaces a namelist.}
+\title{Replaces a namelist}
 \description{
   Replaces the whole namelist in an input file. All parameters in the namelist must be provided, otherwise
   MAESTRA/MAESPA will likely crash.
 }
 \usage{
-replaceNAMELIST(namelist = NA, 
+replaceNameList(namelist = NA, 
                 datfile = NA, 
                 vals = list())
 }
@@ -26,7 +27,7 @@ replaceNAMELIST(namelist = NA,
 \examples{
 
 \dontrun{
-replaceNAMELIST(namelist="aerodyn", 
+replaceNameList(namelist="aerodyn", 
     datfile="trees.dat", vals=list(zht=30,zpd=3,z0ht=0.6))
 }
 }
