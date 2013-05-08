@@ -15,6 +15,9 @@
   Takes an input file for MAESTRA/MAESPA, and reads all
   namelists into a nested list.
 }
+\author{
+Remko Duursma, based on a suggestion by Andreas Ibrom.
+}
 \examples{
 \dontrun{
 # Parse a file
