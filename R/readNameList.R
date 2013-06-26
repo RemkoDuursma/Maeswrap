@@ -1,7 +1,7 @@
 
-readNameList <- function(fn, namelist){
+readNameList <- function(datfile, namelist){
   
-  r <- str_trim(readLines(fn))
+  r <- str_trim(readLines(datfile))
   
   nmStart <- grep(paste0("&",namelist), r, ignore.case=TRUE)
   r <- r[nmStart[1]:length(r)]

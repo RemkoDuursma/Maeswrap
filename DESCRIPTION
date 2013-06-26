@@ -2,10 +2,46 @@ Package: Maeswrap
 Type: Package
 Title: Wrapper functions for MAESTRA/MAESPA.
 Version: 1.5
-Date: 2013-05-06
+Date: 2013-05-08
 Author: Remko Duursma
 Maintainer: Remko Duursma <remkoduursma@gmail.com>
-Depends: rgl,lattice,geometry,stringr
-Description: A bundle of functions for modifying MAESTRA/MAESPA input files, reading output files, and visualizing the stand in 3D. Handy for running sensitivity analyses, scenario analyses, etc.
+Depends:
+    rgl,lattice,geometry,stringr
+Description: A bundle of functions for modifying MAESTRA/MAESPA input files,
+    reading output files, and visualizing the stand in 3D. Handy for running
+    sensitivity analyses, scenario analyses, etc.
 License: GPL
 LazyLoad: yes
+Collate:
+    'addarrow.R'
+    'checkwatbal.R'
+    'coord3dshape.R'
+    'delempty.R'
+    'maesparunall.R'
+    'maestrarunall.R'
+    'Maeswrap-internal.R'
+    'maybeQuote.R'
+    'mayberead.R'
+    'Openstand.R'
+    'parseFile.R'
+    'parsePARline.R'
+    'plot3dtriangles.R'
+    'Plotstand.R'
+    'plottree.R'
+    'plotuspar.R'
+    'printme.R'
+    'readdayflux.R'
+    'readhrflux.R'
+    'readmet.R'
+    'readNameList.R'
+    'readPAR.R'
+    'readuspar.R'
+    'readwatbal.R'
+    'replacemetdata.R'
+    'replacemetvar.R'
+    'replaceNAMELIST.R'
+    'replacePAR.R'
+    'revchar.R'
+    'runmaespa.R'
+    'runmaestra.R'
+    'trynumeric.R'
