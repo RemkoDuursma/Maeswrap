@@ -1,5 +1,4 @@
-`readPAR` <-
-function(datfile, parname, namelist=NA,fail=TRUE){
+readPAR <- function(datfile, parname, namelist=NA,fail=TRUE){
 
 	# read the file
 	datlines <- str_trim(tolower(readLines(datfile)))
