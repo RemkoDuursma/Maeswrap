@@ -9,9 +9,9 @@ replacemetdata <- function (metdfr, oldmetfile = "met.dat",
     preamble <- readLines(oldmetfile)[1:datastart]
 	
 	if(is.na(khrs))
-		khrs <- readPAR(oldmetfile,"khrs","metformat")
+		khrs <- readPAR(oldmetfile,"khrsperday","metformat")
 	else
-		replacePAR(oldmetfile, "khrs","metformat", khrs)	
+		replacePAR(oldmetfile, "khrsperday","metformat", khrs)	
 	
 	startdate <- readPAR(oldmetfile,"startdate","metformat")
 	startDate <- as.Date(startdate[1], "'%d/%m/%y'")
