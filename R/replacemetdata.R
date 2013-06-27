@@ -10,8 +10,6 @@ replacemetdata <- function (metdfr, oldmetfile = "met.dat",
 	
 	if(is.na(khrs))
 		khrs <- readPAR(oldmetfile,"khrsperday","metformat")
-	else
-		replacePAR(oldmetfile, "khrsperday","metformat", khrs)	
 	
 	startdate <- readPAR(oldmetfile,"startdate","metformat")
 	startDate <- as.Date(startdate[1], "'%d/%m/%y'")
@@ -29,7 +27,8 @@ replacemetdata <- function (metdfr, oldmetfile = "met.dat",
     
   replacePAR(newmetfile, "enddate","metformat", format(enddate, "%d/%m/%y"))	
 	replacePAR(newmetfile, "nocolumns","metformat", ncol(metdfr))	
-		
+  replacePAR(newmetfile, "khrsperday","metformat", khrs)  
+    
 	if(!is.na(columns))
 		replacePAR(newmetfile,"columns","metformat",columns,noquotes=TRUE)	
 		
