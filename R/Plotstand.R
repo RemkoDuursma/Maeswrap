@@ -9,9 +9,13 @@ Plotstand <- function(treesfile="trees.dat",
                       axiscex=1,
                       verbose=FALSE,
                       idate=1,
+                      path="",
                       ...){
 
-
+  o <- getwd()
+  on.exit(setwd(o))
+  if(path != "")setwd(path)
+  
 	notrees <- readPAR(treesfile, "notrees", "plot")
 	
 	crownshapes <- rep(NA,notrees)
