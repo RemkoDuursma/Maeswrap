@@ -1,38 +1,43 @@
-replacemetdata <- function (metdfr, oldmetfile = "met.dat", 
-	columns=NA,
-	newmetfile = "met.dat", 
-	khrs=NA) 
-{
+replacemetdata <- function (metdfr, 
+                            oldmetfile = "met.dat", 
+                            columns=NA,
+                            newmetfile = "met.dat", 
+                            khrs=NA,
+                            setdates=TRUE){
+    
     metlines <- readLines(oldmetfile)
     datastart <- grep("DATA START", metlines)
-    #DATA <- read.table(oldmetfile, skip = datastart, header = FALSE)
+    
     preamble <- readLines(oldmetfile)[1:datastart]
-	
-	if(is.na(khrs))
-		khrs <- readPAR(oldmetfile,"khrsperday","metformat")
-	
-	startdate <- readPAR(oldmetfile,"startdate","metformat")
-	startDate <- as.Date(startdate[1], "'%d/%m/%y'")
-	if(is.na(startDate))
-		startDate <- as.Date(startdate[1], "%d/%m/%y")
-
-	N <- nrow(metdfr)
-	if(N %% khrs != 0){
-		extralines <- N %% khrs
-		metdfr <- metdfr[1:(N-extralines),]
-	}
-	enddate <- startDate + N/khrs
-
-  writeLines(preamble, newmetfile)
     
-  replacePAR(newmetfile, "enddate","metformat", format(enddate, "%d/%m/%y"))	
-	replacePAR(newmetfile, "nocolumns","metformat", ncol(metdfr))	
-  replacePAR(newmetfile, "khrsperday","metformat", khrs)  
+    if(is.na(khrs))
+      khrs <- readPAR(oldmetfile,"khrsperday","metformat")
     
-	if(!is.na(columns))
-		replacePAR(newmetfile,"columns","metformat",columns,noquotes=TRUE)	
-		
-  write.table(metdfr, newmetfile, sep = " ", row.names = FALSE, 
+    N <- nrow(metdfr)
+    if(N %% khrs != 0){
+      extralines <- N %% khrs
+      metdfr <- metdfr[1:(N-extralines),]
+    }
+  
+    writeLines(preamble, newmetfile)
+    
+    # set end date based on how many rows of data available.
+    if(setdates){
+      startdate <- readPAR(oldmetfile,"startdate","metformat")
+      startDate <- as.Date(startdate[1], "'%d/%m/%y'")
+      if(is.na(startDate))
+        startDate <- as.Date(startdate[1], "%d/%m/%y")
+      enddate <- startDate + N/khrs
+      replacePAR(newmetfile, "enddate","metformat", format(enddate, "%d/%m/%y"))  
+    }
+    
+    replacePAR(newmetfile, "nocolumns","metformat", ncol(metdfr))	
+    replacePAR(newmetfile, "khrsperday","metformat", khrs)  
+    
+    if(!is.na(columns))
+      replacePAR(newmetfile,"columns","metformat",columns,noquotes=TRUE)	
+    
+    write.table(metdfr, newmetfile, sep = " ", row.names = FALSE, 
         col.names = FALSE, append = TRUE)
 }
 
