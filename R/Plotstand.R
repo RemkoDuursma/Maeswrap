@@ -102,6 +102,8 @@ Plotstand <- function(treesfile="trees.dat",
   
   HCB <- readVar("httrunk", idate)
   
+  if(any(is.na(c(CL,CW,X,Y,HCB,DBH))))stop("Missing values somewhere!")
+  
   Openstand(treesfile)
 
   for(i in 1:notrees){
