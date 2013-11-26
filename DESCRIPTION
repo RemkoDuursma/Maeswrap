@@ -1,8 +1,8 @@
 Package: Maeswrap
 Type: Package
 Title: Wrapper functions for MAESTRA/MAESPA.
-Version: 1.5
-Date: 2013-05-08
+Version: 1.5-2
+Date: 2013-11-26
 Author: Remko Duursma
 Maintainer: Remko Duursma <remkoduursma@gmail.com>
 Depends:

@@ -3,6 +3,7 @@
 #' @param fn Filename
 #' @return Returns a named list, each element contains a namelist and its parameters.
 #' @seealso To read one namelist from a file, see \code{\link{readNameList}}.
+#' @export
 #' @examples 
 #' \dontrun{
 #' # Parse a file
