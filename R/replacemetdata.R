@@ -1,6 +1,6 @@
 replacemetdata <- function (metdfr, 
                             oldmetfile = "met.dat", 
-                            columns=NA,
+                            columns=NULL,
                             newmetfile = "met.dat", 
                             khrs=NA,
                             setdates=TRUE){
@@ -34,7 +34,7 @@ replacemetdata <- function (metdfr,
     replacePAR(newmetfile, "nocolumns","metformat", ncol(metdfr))	
     replacePAR(newmetfile, "khrsperday","metformat", khrs)  
     
-    if(!is.na(columns))
+    if(!is.null(columns))
       replacePAR(newmetfile,"columns","metformat",columns,noquotes=TRUE)	
     
     write.table(metdfr, newmetfile, sep = " ", row.names = FALSE, 

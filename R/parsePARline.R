@@ -14,7 +14,7 @@ parsePARline <- function(s){
   if(is.numeric(tp))return(tp)
   
   # Not returned yet - try splitting
-  spl <- strsplit(parval, " ")[[1]]
+  spl <- strsplit(parval, "[[:space:]]")[[1]]
   
   # Single character
   if(length(spl) == 1){
