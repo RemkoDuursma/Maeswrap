@@ -1,0 +1,38 @@
+Tumbarumba example simulation.
+
+&control
+iohrly=1       
+iotutd=9       
+ioresp=0       
+iohist=0       
+iowatbal=1
+/
+
+Try other dates here.
+&dates
+startdate = '22/02/01'
+enddate = '22/03/01'
+/
+	
+&treescon	
+notrees = 25
+itargets = 4 5 6 7 8 10 11 13 21 23 26 29 33 41 49 56 57 59 61 63 67 70 74 84 86 90 92 97 
+/							
+
+
+
+&diffang					
+nolay = 6
+nzen = 5
+naz= 11
+/
+
+&model
+modelgs = 4
+modelrd = 0
+modeljm = 0
+itermax = 0
+modelss = 0
+/
+
+
