@@ -1,5 +1,4 @@
-"addarrow" <- 
-function(x0,y0,len,bearing,headlen=0.2*len,headangle=25,Nlabel=TRUE,
+"addarrow" <- function(x0,y0,len,bearing,headlen=0.2*len,headangle=25,Nlabel=TRUE,
 	addto=c('rgl','plot','lattice'),...){
 
 	addto <- match.arg(addto)

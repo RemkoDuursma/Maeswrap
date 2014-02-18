@@ -1,3 +1,89 @@
+#' Plot the stand in 3D
+#' 
+#' @description Reads the MAESTRA trees file, and plots the stand in 3D. Supports all
+#' MAESTRA crown shapes except the box shape.  Looks for the 'trees.dat' file
+#' in the current working directory, unless specified (see Examples).  The XY
+#' coordinates *must be present* in the 'trees.dat' file. Users will typically
+#' only use the 'Plotstand' function.
+#' 
+#' Optionally reads the crown shape from the 'str.dat' file, and plots the
+#' correct crown shape for each species in the stand by reading the
+#' multi-species namelists in 'confile.dat' and 'trees.dat'.
+#' 
+#' The target trees are colored red (unless specified otherwise, see Details),
+#' if the 'itargets' is specified in the confile.
+#' 
+#' Attempts to read indivradx, indivrady, indivhtcrown, indivdiam, and
+#' indivhttrunk namelists from the 'trees.dat' file. If any of these fail, the
+#' 'all' versions are tried ('allradx', etc.).  Although MAESTRA runs fine when
+#' no XY coordinates are provided, this plot function crashes. A future
+#' implementation will calculate XY coordinates in the same way as MAESTRA.
+#' 
+#' If the 'strfiles' parameter is set in 'confile.dat' (one str.dat file for
+#' each species in the stand), these files are opened and used to set the crown
+#' shape by species. Alternatively, you may specify crownshape as a parameter,
+#' and override reading of str.dat by setting readstrfiles=FALSE.
+#' 
+#' The 'nz' and 'nalpha' arguments specify the 'smoothness' of the crowns:
+#' higher values provide more detailed triangulation of the crowns, at the
+#' expense of speed.
+#' 
+#' @aliases Plotstand Openstand plottree plot3dtriangles coord3dshape
+#' @param treesfile By default, the 'trees.dat' file in the current dir.
+#' @param strfile Not used, yet.
+#' @param crownshape Character,
+#' "cone","elipsoid","ellipsoid","halfellipsoid","paraboloid","cylinder", or
+#' abbreviation.
+#' @param addNarrow Logical. Add arrow pointing North?
+#' @param xyaxes Logical. Add annotated X and Y axes?
+#' @param labcex Relative size of X and Y axis labels.
+#' @param axiscex Relative size of X and Y axis annotation.
+#' @param verbose If TRUE, writes more info to the screen while plotting.
+#' @param CL Crown length (m).
+#' @param CW Crown width (m).
+#' @param readstrfiles Read the 'str.dat' file(s) to find out crown shape?
+#' @param targethighlight Plot the target trees in red?
+#' @param crowncolor The color of the tree crowns. Default, obviously,
+#' 'forestgreen'.
+#' @param stemcolor The color of the tree stems. Default 'brown'.
+#' @param x0,y0,z0 Coordinates of crown base when calculating 3D coordinates.
+#' @param HCB Height of crown base (m).
+#' @param X,Y X- and Y-coordinates of tree stem base (m).
+#' @param dbh Stem diameter (m). Converted to m if appears to be in cm.
+#' @param nz Number of z divisions (increase number to get smoother crowns).
+#' @param nalpha Number of angular divisions (increase number to get smoother
+#' crowns).
+#' @param m 3xN matrix (x,y,z coordinates in rows).
+#' @param idate If multiple dates are provided for tree size variables, which
+#' one to display.
+#' @param path The folder where the input files are stored.
+#' @param \dots Further parameters passed (to plottree, or triangles3d).
+#' @return An rgl device is opened.
+#' @author Remko Duursma
+#' @keywords utilities
+#' @examples
+#' 
+#' 
+#' \dontrun{
+#' 
+#' # Plot the 'trees.dat' file in the current working directory:
+#' Plotstand()
+#' 
+#' # Open a dialog box to select a trees.dat file:
+#' Plotstand(file.choose())
+#' 
+#' # Save a snapshot to a .png file.
+#' # Note: make sure to move the 3D plot into view 
+#' # (so that other windows are not blocking it!)
+#' snapshot3d('myforest.png')
+#' 
+#' # For publication-quality graphs:
+#' Plotstand(nz=50, nalpha=50)
+#' 
+#' 
+#' }
+#' 
+#' @export
 Plotstand <- function(treesfile="trees.dat", 
           				    strfile="str.dat",
           					  crownshape=c("cone","ellipsoid","round","halfellipsoid","paraboloid","cylinder"), 

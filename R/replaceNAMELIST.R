@@ -1,3 +1,26 @@
+#' Replaces a namelist
+#' 
+#' @description Replaces the whole namelist in an input file. All parameters in the namelist
+#' must be provided, otherwise MAESTRA/MAESPA will likely crash.
+#' 
+#' 
+#' @param namelist Name of the namelist.
+#' @param datfile Name of the input file.
+#' @param vals A list of values (see example below).
+#' @return Nothing is returned. The input file is modified.
+#' @author Remko Duursma
+#' @seealso \code{\link{replacePAR}}
+#' @references See Belinda Medlyn's MAESTRA homepage at:
+#' \url{http://www.bio.mq.edu.au/maestra/ }
+#' @keywords utilities
+#' @examples
+#' 
+#' 
+#' \dontrun{
+#' replaceNameList(namelist="aerodyn", 
+#'     datfile="trees.dat", vals=list(zht=30,zpd=3,z0ht=0.6))
+#' }
+#' 
 replaceNameList <- function(namelist=NA, datfile=NA, vals=list()){
 
     

@@ -1,89 +1,119 @@
 \name{Plotstand}
-\alias{Plotstand}
 \alias{Openstand}
-\alias{plottree}
-\alias{plot3dtriangles}
+\alias{Plotstand}
 \alias{coord3dshape}
-
-\title{ Plot the stand in 3D}
-\description{
-  Reads the MAESTRA trees file, and plots the stand in 3D. Supports all MAESTRA crown shapes except the box shape.
-  Looks for the 'trees.dat' file in the current working directory, unless specified (see Examples).
-  The XY coordinates *must be present* in the 'trees.dat' file. Users will typically only use the 'Plotstand' function.
-  
-  Optionally reads the crown shape from the 'str.dat' file, and plots the correct crown shape for each species in the 
-  stand by reading the multi-species namelists in 'confile.dat' and 'trees.dat'.
-  
-  The target trees are colored red (unless specified otherwise, see Details), if the 'itargets' is specified in the confile.
-  
-}
+\alias{plot3dtriangles}
+\alias{plottree}
+\title{Plot the stand in 3D}
 \usage{
-Plotstand(treesfile="trees.dat", 
-strfile="str.dat",
-crownshape=c("cone","ellipsoid","round","halfellipsoid","paraboloid","cylinder"), 
-readstrfiles=TRUE,targethighlight=TRUE,
-addNarrow=TRUE, xyaxes=TRUE,labcex=1,axiscex=1,
-verbose=FALSE,idate=1,path="",...)
-
-Openstand(treesfile="trees.dat")
-
-plottree(crownshape=c("cone","elipsoid","ellipsoid","round",
-	"halfellipsoid","paraboloid","cylinder"), 
-	CL=1, CW=1, HCB=1, X=0, Y=0, dbh=0.3, crowncolor="forestgreen", 
-	stemcolor="brown", nz=25, nalpha=25, ...)
-    plot3dtriangles(m,...)
-
-coord3dshape(crownshape=c("cone","ellipsoid","halfellipsoid",
-	"paraboloid","cylinder"),
-	nz=25, nalpha=25, CL=1, CW=1, x0=0, y0=0, z0=0)
+Plotstand(treesfile = "trees.dat", strfile = "str.dat",
+  crownshape = c("cone", "ellipsoid", "round", "halfellipsoid", "paraboloid",
+  "cylinder"), readstrfiles = TRUE, targethighlight = TRUE,
+  addNarrow = TRUE, xyaxes = TRUE, labcex = 1, axiscex = 1,
+  verbose = FALSE, idate = 1, path = "", ...)
 }
 \arguments{
-  \item{treesfile}{By default, the 'trees.dat' file in the current dir.}
+  \item{treesfile}{By default, the 'trees.dat' file in the
+  current dir.}
+
   \item{strfile}{Not used, yet.}
-  \item{crownshape}{Character, "cone","elipsoid","ellipsoid","halfellipsoid","paraboloid","cylinder", or abbreviation.}
+
+  \item{crownshape}{Character,
+  "cone","elipsoid","ellipsoid","halfellipsoid","paraboloid","cylinder",
+  or abbreviation.}
+
   \item{addNarrow}{Logical. Add arrow pointing North?}
+
   \item{xyaxes}{Logical. Add annotated X and Y axes?}
+
   \item{labcex}{Relative size of X and Y axis labels.}
+
   \item{axiscex}{Relative size of X and Y axis annotation.}
-  \item{verbose}{If TRUE, writes more info to the screen while plotting.}
+
+  \item{verbose}{If TRUE, writes more info to the screen
+  while plotting.}
+
   \item{CL}{Crown length (m).}
+
   \item{CW}{Crown width (m).}
-  \item{readstrfiles}{Read the 'str.dat' file(s) to find out crown shape?}
+
+  \item{readstrfiles}{Read the 'str.dat' file(s) to find
+  out crown shape?}
+
   \item{targethighlight}{Plot the target trees in red?}
-  \item{crowncolor}{The color of the tree crowns. Default, obviously, 'forestgreen'.}
-  \item{stemcolor}{The color of the tree stems. Default 'brown'.}
-  \item{x0,y0,z0}{Coordinates of crown base when calculating 3D coordinates.}
+
+  \item{crowncolor}{The color of the tree crowns. Default,
+  obviously, 'forestgreen'.}
+
+  \item{stemcolor}{The color of the tree stems. Default
+  'brown'.}
+
+  \item{x0,y0,z0}{Coordinates of crown base when
+  calculating 3D coordinates.}
+
   \item{HCB}{Height of crown base (m).}
+
   \item{X,Y}{X- and Y-coordinates of tree stem base (m).}
-  \item{dbh}{Stem diameter (m). Converted to m if appears to be in cm.}
-  \item{nz}{Number of z divisions (increase number to get smoother crowns).}
-  \item{nalpha}{Number of angular divisions (increase number to get smoother crowns).}
+
+  \item{dbh}{Stem diameter (m). Converted to m if appears
+  to be in cm.}
+
+  \item{nz}{Number of z divisions (increase number to get
+  smoother crowns).}
+
+  \item{nalpha}{Number of angular divisions (increase
+  number to get smoother crowns).}
+
   \item{m}{3xN matrix (x,y,z coordinates in rows).}
-  \item{idate}{If multiple dates are provided for tree size variables, which one to display.}
+
+  \item{idate}{If multiple dates are provided for tree size
+  variables, which one to display.}
+
   \item{path}{The folder where the input files are stored.}
-  \item{\dots}{Further parameters passed (to plottree, or triangles3d).}
+
+  \item{\dots}{Further parameters passed (to plottree, or
+  triangles3d).}
 }
 \value{
-    An rgl device is opened.
+An rgl device is opened.
 }
-\details{
-Attempts to read indivradx, indivrady, indivhtcrown, indivdiam, and indivhttrunk namelists from the 'trees.dat' file.
-If any of these fail, the 'all' versions are tried ('allradx', etc.). 
-Although MAESTRA runs fine when no XY coordinates are provided, this plot function crashes.
-A future implementation will calculate XY coordinates in the same way as MAESTRA.
+\description{
+Reads the MAESTRA trees file, and plots the stand in 3D.
+Supports all MAESTRA crown shapes except the box shape.
+Looks for the 'trees.dat' file in the current working
+directory, unless specified (see Examples).  The XY
+coordinates *must be present* in the 'trees.dat' file.
+Users will typically only use the 'Plotstand' function.
 
-If the 'strfiles' parameter is set in 'confile.dat' (one str.dat file for each species in the stand), these files are opened
-and used to set the crown shape by species. Alternatively, you may specify crownshape as a parameter, and override reading
-of str.dat by setting readstrfiles=FALSE.
+Optionally reads the crown shape from the 'str.dat' file,
+and plots the correct crown shape for each species in the
+stand by reading the multi-species namelists in
+'confile.dat' and 'trees.dat'.
 
-The 'nz' and 'nalpha' arguments specify the 'smoothness' of the crowns: higher values provide more detailed triangulation
-of the crowns, at the expense of speed.
+The target trees are colored red (unless specified
+otherwise, see Details), if the 'itargets' is specified in
+the confile.
 
+Attempts to read indivradx, indivrady, indivhtcrown,
+indivdiam, and indivhttrunk namelists from the 'trees.dat'
+file. If any of these fail, the 'all' versions are tried
+('allradx', etc.).  Although MAESTRA runs fine when no XY
+coordinates are provided, this plot function crashes. A
+future implementation will calculate XY coordinates in the
+same way as MAESTRA.
+
+If the 'strfiles' parameter is set in 'confile.dat' (one
+str.dat file for each species in the stand), these files
+are opened and used to set the crown shape by species.
+Alternatively, you may specify crownshape as a parameter,
+and override reading of str.dat by setting
+readstrfiles=FALSE.
+
+The 'nz' and 'nalpha' arguments specify the 'smoothness' of
+the crowns: higher values provide more detailed
+triangulation of the crowns, at the expense of speed.
 }
-\author{ Remko Duursma}
-
 \examples{
-
 \dontrun{
 
 # Plot the 'trees.dat' file in the current working directory:
@@ -93,7 +123,7 @@ Plotstand()
 Plotstand(file.choose())
 
 # Save a snapshot to a .png file.
-# Note: make sure to move the 3D plot into view 
+# Note: make sure to move the 3D plot into view
 # (so that other windows are not blocking it!)
 snapshot3d('myforest.png')
 
@@ -102,7 +132,9 @@ Plotstand(nz=50, nalpha=50)
 
 
 }
-
 }
+\author{
+Remko Duursma
+}
+\keyword{utilities}
 
-\keyword{ utilities }

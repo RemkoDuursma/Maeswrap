@@ -1,3 +1,41 @@
+#' Plot the understorey PAR points
+#' 
+#' Reads the 'uspar.dat' file in the current working directory, and plots the
+#' incident or absorbed (or diffuse, or direct) PAR at the understorey points.
+#' Either produces a plot, or makes a pdf with a plot for each hour of the
+#' selected day.
+#' 
+#' If addNarrow is TRUE, attempts to read the trees.dat file in the current
+#' working directory as well. Prints a warning when this file cannot be opened.
+#' 
+#' @aliases plotuspar readuspar
+#' @param what Either 'diff', 'apar', 'ipar', or 'beam' (the default).
+#' @param dataset If left alone, reads the uspar dataset.
+#' @param day Which day to use, if left alone uses the first day only.
+#' @param hour Which hour to plot. If left alone, makes a plot for each hour.
+#' @param xlim,ylim X- and Y-axis limits.
+#' @param makepdf Logical. If TRUE, produces a pdf in the working directory.
+#' @param outputfile Name of the pdf file.
+#' @param scaleeach Logical. Rescale grey scale for each plot, or same for all
+#' hours?
+#' @param addNarrow Logical. Add an arrow pointing North.
+#' @return A lattice device, or a pdf.
+#' @author Remko Duursma
+#' @keywords utilities
+#' @examples
+#' 
+#' 
+#' \dontrun{
+#' 
+#' # Plot one hour of the first day, showing incident PAR on understorey:
+#' plotuspar("ipar", day=1,hour=12,makepdf=FALSE)
+#' 
+#' # Make pdf of the whole day, plotting beam radiation:
+#' plotuspar("beam", day=1, outputfile="beam uspar")
+#' 
+#' }
+#' 
+#' 
 plotuspar <- function(what=c("beam","ipar","diff","apar"), dataset=NULL, 
                       day=1, hour=NA, xlim=NULL, ylim=NULL,
 					  makepdf=FALSE, outputfile = "apar understorey.pdf", scaleeach=TRUE,

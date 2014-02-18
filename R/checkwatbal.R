@@ -1,5 +1,17 @@
-
 # Summarize water balance fluxes, compare to simulated change in soil water storage.
+#' Checks MAESPA water balance by adding up fluxes for the soil water balance calculated by MAESPA. Prints the
+#' total fluxes (precipitation, transpiration, canopy interception, and so on),
+#' and the difference between ingoing and outgoing. This is a
+#' debugging/checking tool: if the model has serious problems, there will be a
+#' missing sink or source.
+#' 
+#' @param x A dataframe returned by \code{\link{readwatbal}}.
+#' @param usemeaset Whether to use measured ET from the met file, or simulated
+#' (Default).
+#' @author Remko Duursma
+#' @seealso \code{\link{readwatbal}}
+#' @keywords misc
+#' @export
 checkwatbal <- function(x = readwatbal(), usemeaset=FALSE){
 	
 	if(is.na(x$wsoilroot[1]))

@@ -1,30 +1,25 @@
 \name{revchar}
 \alias{revchar}
-
-\title{ Reverse a character string.}
-\description{
-  Reverses the characters in a character string, unless a vector is supplied,
-  in which case reverses the element of the vector.
-}
+\title{Reverse a character string.}
 \usage{
 revchar(x)
 }
 \arguments{
-  \item{x}{ A character vector (typically of length 1). }
-}
-\details{
-  When a character vector of length > 1 is provided, reverses the elements of the vector, not the
-  characters itself.
+  \item{x}{A character vector (typically of length 1).}
 }
 \value{
 A vector.
 }
-\references{ None. }
-\author{ Remko Duursma}
-
-\seealso{ \code{\link{rev.default}},\code{\link{substr}},\code{\link{strsplit}}  }
+\description{
+Reverses the characters in a character string, unless a
+vector is supplied, in which case reverses the element of
+the vector.
+}
+\details{
+When a character vector of length > 1 is provided, reverses
+the elements of the vector, not the characters itself.
+}
 \examples{
-
 \dontrun{
 # Take a substring, counting from the end:
 substrfromend <- function(x,start,stop)revchar(substr(revchar(x),start,stop))
@@ -35,7 +30,17 @@ s <- 'saippuakivikauppias'
 s == revchar(s)
 
 # A semordnilap:
-cat('I am so stressed, I need to eat', revchar('stressed'),'\n')
+cat('I am so stressed, I need to eat', revchar('stressed'),'\\n')
 }
 }
-\keyword{ methods }
+\author{
+Remko Duursma
+}
+\references{
+None.
+}
+\seealso{
+\code{\link{rev.default}},\code{\link{substr}},\code{\link{strsplit}}
+}
+\keyword{methods}
+

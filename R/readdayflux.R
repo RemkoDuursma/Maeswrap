@@ -1,5 +1,23 @@
-`readdayflux` <-
-function(filename="dayflx.dat"){
+#' Reads the dayflx.dat output file
+#' 
+#' @description Reads the dayflx.dat MAESTRA/MAESPA output file, returns a clean dataframe.
+#' Names of the variables are read from the Columns: line.
+#' 
+#' 
+#' @param filename Default name of the daily flux file.
+#' @return Returns a dataframe.
+#' @author Remko Duursma
+#' @keywords utilities
+#' @examples
+#' 
+#' 
+#' \dontrun{
+#' # Read it:
+#' mysim1 <- readdayflux()
+#' }
+#' 
+#' @export
+readdayflux <- function(filename="dayflx.dat"){
 
 	daylines <- readLines(filename)
 	colloc <- grep("Columns",daylines)

@@ -1,31 +1,28 @@
 \name{readdayflux}
 \alias{readdayflux}
-
-\title{ Reads the dayflx.dat output file}
-\description{
-  Reads the dayflx.dat MAESTRA/MAESPA output file, returns a clean dataframe.
-  Names of the variables are read from the Columns: line.
-}
+\title{Reads the dayflx.dat output file}
 \usage{
 readdayflux(filename = "dayflx.dat")
 }
 \arguments{
-  \item{filename}{ Default name of the daily flux file.}
+  \item{filename}{Default name of the daily flux file.}
 }
-
 \value{
-  Returns a dataframe.
+Returns a dataframe.
 }
-
-\author{ Remko Duursma }
-
+\description{
+Reads the dayflx.dat MAESTRA/MAESPA output file, returns a
+clean dataframe. Names of the variables are read from the
+Columns: line.
+}
 \examples{
-
 \dontrun{
 # Read it:
 mysim1 <- readdayflux()
 }
-
 }
+\author{
+Remko Duursma
+}
+\keyword{utilities}
 
-\keyword{ utilities }

@@ -1,5 +1,22 @@
-`readhrflux` <-
-function(filename="hrflux.dat"){
+#' Reads the hrflux.dat MAESTRA/MAESPA output file
+#' 
+#' @description Reads the hourly output file (hrflux.dat).
+#' 
+#' 
+#' @param filename Default name of the (half-)hourly output file.
+#' @return Returns a dataframe.
+#' @author Remko Duursma
+#' @keywords utilities
+#' @examples
+#' 
+#' 
+#' \dontrun{
+#' 
+#' # Simple as this:
+#' mysim2 <- readhrflux()
+#' }
+#' @export
+readhrflux <- function(filename="hrflux.dat"){
 	
 	hrlines <- readLines(filename)
 	colloc <- grep("Columns",hrlines)

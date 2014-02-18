@@ -1,3 +1,5 @@
+#' @rdname batchutil
+#' @export
 `runmaespa` <-
 function(whichrow=1, whichcols=NA, runfile=file.choose(), runit=TRUE, executable="maespa.exe",
 		 deffile="maeswrapdefinitions.txt",spinup=FALSE,...

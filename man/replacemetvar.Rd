@@ -1,34 +1,45 @@
-\name{replacemetvar}
-\alias{replacemetvar}
+\name{replacemetdata}
 \alias{replacemetdata}
-\title{ Replace a weather variable}
-\description{
-  Replaces one (or more) of the weather variables in the met.dat file. 
-}
+\alias{replacemetvar}
+\title{Replace a weather variable}
 \usage{
-replacemetvar(replacevar, newvalues, oldmetfile="met.dat", 
-	newmetfile="metNEW.dat")
+replacemetdata(metdfr, oldmetfile = "met.dat", columns = NULL,
+  newmetfile = "met.dat", khrs = NA, setdates = TRUE)
 
-replacemetdata(metdfr, oldmetfile = "met.dat", columns = NA, 
-	newmetfile = "met.dat", khrs = NA)
+replacemetvar(replacevar, newvalues, oldmetfile = "met.dat",
+  newmetfile = "metNEW.dat")
 }
 \arguments{
-  \item{replacevar}{ Character. Name(s) of the variable to be replaced.}
-  \item{newvalues}{ Vector of new values for the weather variable, 
-  has to be the same length as the number of records in the met.dat file.}
-  \item{oldmetfile}{ Default name of the met.dat file that will be modified.}
-  \item{newmetfile}{ Name of the new met.dat file.}
-  \item{metdfr}{Dataframe with met data, to be pasted into a met.dat file.}
-  \item{columns}{Optional character string : if the 'Columns' statement in the met.dat file is to be replaced.}
-  \item{khrs}{Optional. Number of timesteps per day (by default, read from the met.dat file).}
+  \item{replacevar}{Character. Name(s) of the variable to
+  be replaced.}
+
+  \item{newvalues}{Vector of new values for the weather
+  variable, has to be the same length as the number of
+  records in the met.dat file.}
+
+  \item{oldmetfile}{Default name of the met.dat file that
+  will be modified.}
+
+  \item{newmetfile}{Name of the new met.dat file.}
+
+  \item{metdfr}{Dataframe with met data, to be pasted into
+  a met.dat file.}
+
+  \item{columns}{Optional character string : if the
+  'Columns' statement in the met.dat file is to be
+  replaced.}
+
+  \item{khrs}{Optional. Number of timesteps per day (by
+  default, read from the met.dat file).}
 }
 \value{
-  Returns nothing.
+Returns nothing.
 }
-\author{ Remko Duursma}
-
+\description{
+Replaces one (or more) of the weather variables in the
+met.dat file.
+}
 \examples{
-
 \dontrun{
 
 #:::1.::: Replace precipitation with random number between 0 and 2.
@@ -53,7 +64,9 @@ replacemetvar(c("PPT","TAIR"), newmat, "met.dat", "newmet.dat")
 
 
 }
-
 }
+\author{
+Remko Duursma
+}
+\keyword{utilities}
 
-\keyword{ utilities}

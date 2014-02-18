@@ -1,3 +1,5 @@
+#' @rdname replacemetvar
+#' @export
 replacemetdata <- function (metdfr, 
                             oldmetfile = "met.dat", 
                             columns=NULL,

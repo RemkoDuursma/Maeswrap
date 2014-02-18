@@ -1,6 +1,11 @@
 #' Generate a simple random stand of trees
-#' @description Generates a stand of trees, given a LAI, stocking, and some basic allometry. Very simple implementation that will be expanded (and eventually rolled into Maes*).
-#' @export
+#' 
+#'@description Generates a stand of trees, given a LAI, stocking, and some basic allometry.
+#' Very simple implementation that will be expanded (and eventually rolled into
+#' Maes*).
+#' 
+#' 
+#' @export randomstand
 randomstand <- function(LAI = 2,
                         height = 20,
                         cwcl = 0.8,
