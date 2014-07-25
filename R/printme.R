@@ -1,5 +1,4 @@
-`printme` <-
-function(x, SEP=" "){
+printme <- function(x, SEP=" "){
     if(length(x)==1)return(maybeQuote(x))
     if(length(x) > 1){
 		X <- maybeQuote(x)

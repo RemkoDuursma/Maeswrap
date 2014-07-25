@@ -61,7 +61,6 @@
 #' hourly results from the model output. These dataframes are read from the
 #' files dayflux.dat and hrflux.dat.
 #' @author Remko Duursma
-#' @keywords utilities
 #' @examples
 #' 
 #' 

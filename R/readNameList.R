@@ -1,4 +1,8 @@
-
+#' Read a namelist into a list
+#' 
+#' @param datfile Name of the Maestra/Maespa input file (e.g. "trees.dat")
+#' @param namelist Name of the namelist (e.g. "plot")
+#' @export
 readNameList <- function(datfile, namelist){
   
   r <- str_trim(readLines(datfile))
