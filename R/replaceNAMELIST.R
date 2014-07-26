@@ -53,7 +53,7 @@ replaceNameList <- function(namelist, datfile, vals){
     # Find NAMELIST and end of it ("/")
     datlines <- str_trim(tolower(readLines(datfile)))
 	  namelist <- tolower(namelist)
-    nmreg <- paste0("&",namelist)
+    nmreg <- paste0("&",namelist,"$")
 	
     nl_start <- grep(nmreg, datlines)
     
