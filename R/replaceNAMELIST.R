@@ -77,13 +77,7 @@ replaceNameList <- function(namelist, datfile, vals){
     }
     
     # New namelist
-    listvals <- c()
-    for(i in 1:length(vals)){
-      listvals[i] <- paste(names(vals)[i],printme(vals[[i]], "\n"), 
-                           sep=" = ")
-      newlist <- c(paste0("&",namelist),
-                    listvals, "/")
-    }
+    newlist <- formatNameList(namelist, vals)    
     
     # Rewrite file
     Lines <- c(pref, newlist, postf)
@@ -91,6 +85,19 @@ replaceNameList <- function(namelist, datfile, vals){
 }
 
  
+formatNameList <- function(namelist, vals){
+  
+  # New namelist
+  listvals <- c()
+  for(i in 1:length(vals)){
+    listvals[i] <- paste(names(vals)[i],printme(vals[[i]], "\n"), 
+                         sep=" = ")
+    newlist <- c(paste0("&",namelist),
+                 listvals, "/")
+  }
+
+return(newlist)
+}
 
 
 #'@rdname replacePAR
