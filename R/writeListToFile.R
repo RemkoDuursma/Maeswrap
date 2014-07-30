@@ -9,7 +9,7 @@ writeListsToFile <- function(lis, fn){
     txt[[i]] <- formatNameList(nml[i], lis[[i]])
     txt[[i]] <- c(txt[[i]], "")
   }
-  txt <- do.call(c,txt)
+  txt <- unlist(txt)
   
   writeLines(txt, fn)
 }
