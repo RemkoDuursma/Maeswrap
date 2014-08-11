@@ -4,9 +4,10 @@
 \alias{readuspar}
 \title{Plot the understorey PAR points}
 \usage{
-plotuspar(what = c("beam", "ipar", "diff", "apar"), dataset = NULL,
-  day = 1, hour = NA, xlim = NULL, ylim = NULL, makepdf = FALSE,
-  outputfile = "apar understorey.pdf", scaleeach = TRUE, addNarrow = TRUE)
+plotuspar(what = c("PARbeam", "PARtotal", "PARdiffuse", "APAR"),
+  dataset = NULL, day = 1, hour = NA, xlim = NULL, ylim = NULL,
+  makepdf = FALSE, outputfile = "aparunderstorey.pdf", scaleeach = TRUE,
+  addNarrow = TRUE)
 }
 \arguments{
 \item{what}{Either 'diff', 'apar', 'ipar', or 'beam' (the default).}
@@ -55,5 +56,4 @@ plotuspar("beam", day=1, outputfile="beam uspar")
 \author{
 Remko Duursma
 }
-\keyword{utilities}
 

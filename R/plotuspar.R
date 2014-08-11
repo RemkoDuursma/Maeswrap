@@ -21,10 +21,9 @@
 #' @param addNarrow Logical. Add an arrow pointing North.
 #' @return A lattice device, or a pdf.
 #' @author Remko Duursma
-#' @keywords utilities
+#' @export
+#' 
 #' @examples
-#' 
-#' 
 #' \dontrun{
 #' 
 #' # Plot one hour of the first day, showing incident PAR on understorey:
@@ -34,15 +33,14 @@
 #' plotuspar("beam", day=1, outputfile="beam uspar")
 #' 
 #' }
-#' 
-#' 
-plotuspar <- function(what=c("beam","ipar","diff","apar"), dataset=NULL, 
+plotuspar <- function(what=c("PARbeam","PARtotal","PARdiffuse","APAR"), dataset=NULL, 
                       day=1, hour=NA, xlim=NULL, ylim=NULL,
-					  makepdf=FALSE, outputfile = "apar understorey.pdf", scaleeach=TRUE,
+					  makepdf=FALSE, outputfile = "aparunderstorey.pdf", scaleeach=TRUE,
 					  addNarrow = TRUE
 ){
 
 	what <- match.arg(what)
+  
 	r <- require(lattice)
     if(!r)stop("Need lattice package\n")
 	
@@ -56,6 +54,7 @@ plotuspar <- function(what=c("beam","ipar","diff","apar"), dataset=NULL,
 	y0 <- try(readPAR("ustorey.dat", "Y0", "control"))
 	xmax <- try(readPAR("ustorey.dat", "XMAX", "control"))
 	ymax <- try(readPAR("ustorey.dat", "YMAX", "control"))
+  
 	if(any(sapply(c(x0,y0,xmax,ymax),inherits,"try-error"))){
 		boxdraw <- FALSE
 		warning("Could not read x0,y0,xmax and/or ymax.")
@@ -63,64 +62,68 @@ plotuspar <- function(what=c("beam","ipar","diff","apar"), dataset=NULL,
 	
 	if(is.null(dataset)){
         dataset <- readuspar()
-    }
-    dataset$Z <- dataset[,what]
+  }
+  
+  dataset$Z <- dataset[,what]
 	nhour <- max(dataset$hour)
 	
-    if(!is.na(day))
-		dataset <- dataset[dataset$day==day,]
+  if(!is.na(day))
+	  dataset <- dataset[dataset$day==day,]
 	
 	if(!is.na(hour))
 		dataset <- dataset[dataset$hour==hour,]
 		
 	nhours <- length(unique(dataset$hour))
 	
-    z <- list();k <- 1
-    for(ihour in unique(dataset$hour)){
-      DATA <- subset(dataset, hour == ihour)
+  z <- list();k <- 1
+  
+  for(ihour in unique(dataset$hour)){
       
-      if(nhour == 24){
-        TIME <- format(strptime(as.character(ihour), format="%H"), format="%H:%M")
-      }
-      if(nhour == 48){
-         HOUR <- as.character(ihour %/% 2)
-         MIN <- as.character( 30 * ihour %% 2)
-         hourmin <- paste(HOUR,MIN, sep=" ")
-         TIME <- format(strptime(hourmin, format="%H %M"), format="%H:%M")
-      }
+    DATA <- dataset[dataset$hour == ihour,]
+    
+    if(nhour == 24){
+      TIME <- format(strptime(as.character(ihour), format="%H"), format="%H:%M")
+    }
+    if(nhour == 48){
+       HOUR <- as.character(ihour %/% 2)
+       MIN <- as.character( 30 * ihour %% 2)
+       hourmin <- paste(HOUR,MIN, sep=" ")
+       TIME <- format(strptime(hourmin, format="%H %M"), format="%H:%M")
+    }
       
-	  if(is.null(xlim))xlim <- c(0,max(DATA$x))
-	  if(is.null(ylim))ylim <- c(0,max(DATA$y))
+	  if(is.null(xlim))xlim <- c(0,max(DATA$X))
+	  if(is.null(ylim))ylim <- c(0,max(DATA$Y))
 	  
 	  X0 <- xlim[1] + 0.1*(xlim[2] - xlim[1])
 	  Y0 <- ylim[1] + 0.1*(ylim[2] - ylim[1])
 	  LEN <- 0.1 * (xlim[2] - xlim[1])
 	  
 	  if(scaleeach)
-		AT <- seq(0,max(DATA$Z),length=50)
+		  AT <- seq(0,max(DATA$Z),length=50)
 	  else
-		AT <- seq(0,max(dataset$Z),length=50)
+		  AT <- seq(0,max(dataset$Z),length=50)
 		
 	  if(all(AT == 0))next
 	  	  
-      z[[k]] <- with(DATA, levelplot(Z ~ x*y, 
-        main=TIME,
-        xlim=xlim,ylim=ylim,
-        at=AT,
-		panel=function(x,y,...){
-			panel.levelplot(x,y,...)
-			if(addNarrow)addarrow(X0,Y0,len=LEN,bearing=Bearing,addto="lattice")
-			if(boxdraw)lrect(x0,y0,xmax,ymax,border="darkgrey")
-		},
+    z[[k]] <- with(DATA, levelplot(Z ~ X*Y, 
+        main=TIME, xlim=xlim,ylim=ylim,
+        at=AT, panel=function(x,y,...){
+			                  panel.levelplot(x,y,...)
+            			if(addNarrow)addarrow(X0,Y0,len=LEN,bearing=Bearing,addto="lattice")
+            			if(boxdraw)lrect(x0,y0,xmax,ymax,border="darkgrey")
+            		},
         col.regions=grey(seq(0,1,length=50))))
       k <- k + 1
     }
 	
-	if(makepdf && revchar(substr(revchar(outputfile),1,4)) != ".pdf"){
+	if(makepdf && file_ext(outputfile) != "pdf"){
 		outputfile <- paste(outputfile,".pdf",sep="")
 	}
-    if(makepdf)pdf(outputfile,onefile=TRUE)
-    for(i in seq_along(z)){print(z[[i]])}  #;Sys.sleep(0.2)
-    if(makepdf)dev.off()
+  
+  if(makepdf){
+    pdf(outputfile,onefile=TRUE)
+    on.exit(dev.off())
+  }
+    for(i in seq_along(z)){print(z[[i]])}
 
 }

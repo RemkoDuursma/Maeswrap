@@ -14,7 +14,8 @@ parameters.
 }
 \description{
 Takes an input file for MAESTRA/MAESPA, and reads all namelists into a
-nested list.
+nested list. Also reads the first line of the file, which (optionally) contains a title,
+to be used in Maestra/pa output files.
 }
 \examples{
 \dontrun{
