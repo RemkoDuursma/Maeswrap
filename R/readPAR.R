@@ -40,12 +40,15 @@
 #' @export
 readPAR <- function(datfile, parname, namelist=NA,fail=TRUE){
 
+  parname <- tolower(parname)
+  namelist <- tolower(namelist)
+  
   # Read entire file
   p <- parseFile(datfile)
   
   if(is.na(namelist)){
     # Find parameter
-    res <- unlist(unname(lapply(p, "[[", tolower(parname))))
+    res <- unlist(unname(lapply(p, "[[", parname)))
   } else {
     
     if(!namelist %in% names(p) && fail)
