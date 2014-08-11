@@ -19,7 +19,7 @@
 #' @export
 readdayflux <- function(filename="dayflx.dat"){
 
-	daylines <- readLines(filename)
+	daylines <- readLines(filename, 100)
 	colloc <- grep("Columns",daylines)
 	dayflux <- read.table(filename, skip=colloc)
 	names(dayflux) <- delempty(strsplit(delempty(strsplit(daylines[colloc], "Columns:")[[1]])," ")[[1]])

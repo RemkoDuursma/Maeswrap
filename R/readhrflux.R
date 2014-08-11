@@ -18,7 +18,7 @@
 #' @export
 readhrflux <- function(filename="hrflux.dat"){
 	
-	hrlines <- readLines(filename)
+	hrlines <- readLines(filename, 100)
 	colloc <- grep("Columns",hrlines)
 
 	hrflux <- read.table(filename, skip=colloc,na.strings='NaN')
