@@ -28,7 +28,9 @@
 #' higher values provide more detailed triangulation of the crowns, at the
 #' expense of speed.
 #' 
-#' @aliases Plotstand Openstand plottree plot3dtriangles coord3dshape
+#' @details For large stands, the plot takes quite a while to complete. This code is far 
+#' from optimized for speed, because I am patient. Also, minimize the rgl window to greatly speed it up.
+#' 
 #' @param treesfile By default, the 'trees.dat' file in the current dir.
 #' @param strfile Not used, yet.
 #' @param crownshape Character,
@@ -60,7 +62,6 @@
 #' @param \dots Further parameters passed (to plottree, or triangles3d).
 #' @return An rgl device is opened.
 #' @author Remko Duursma
-#' @keywords utilities
 #' @examples
 #' 
 #' 
@@ -185,6 +186,9 @@ Plotstand <- function(treesfile="trees.dat",
   CL <- readVar("htcrown", idate)
 	DBH <- readVar("diam", idate)
 	if(max(DBH) > 3)DBH <- 0.01 * DBH
+  
+  # Avoid small DBH, rgl does not like that.
+  DBH <- pmin(0.05, DBH)
   
   HCB <- readVar("httrunk", idate)
   

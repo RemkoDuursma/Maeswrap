@@ -1,7 +1,8 @@
 #' Parse an input file
 #' 
 #' @description Takes an input file for MAESTRA/MAESPA, and reads all namelists into a
-#' nested list.
+#' nested list. Also reads the first line of the file, which (optionally) contains a title, 
+#' to be used in Maestra/pa output files.
 #' 
 #' 
 #' @param fn Filename
@@ -23,6 +24,8 @@ parseFile <- function(fn){
   
   r <- str_trim(tolower(readLines(fn)))
   
+  Title <- r[1]
+  
   nml <- r[grep("^&",r)]
   nml <- gsub("&","",nml)
   
@@ -32,6 +35,8 @@ parseFile <- function(fn){
     l[[i]] <- readNameList(fn, nml[i])
     
   }
-  names(l) <- nml
+  l <- c(Title,l)
+  names(l) <- c("Title", nml)
+  
 return(l)
 }
