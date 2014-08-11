@@ -22,7 +22,7 @@
 #' @export
 readwatbal <- function(filename="watbal.dat"){
 
-	watlines <- readLines(filename)
+	watlines <- readLines(filename, 100)
 	colloc <- grep("Columns",watlines)
 	namesline <- watlines[colloc]
 	NAMES <- delempty(strsplit(strsplit(namesline, ":")[[1]][2], " ")[[1]])
