@@ -43,7 +43,7 @@
 #' # Useful for tree namelists with multiple dates and multiple trees 
 #' # (where each row corresponds to a tree, and each column to a date.)
 #' m <- matrix(c(1,2,3,4,5,6,7,8,9), nrow=3, byrow=TRUE)
-#' replacePAR("trees.dat", "indivlarea", "values", newval=m)
+#' replacePAR("trees.dat", "values", "indivlarea", newval=m)
 #' }
 #' 
 #' @export
@@ -75,7 +75,7 @@ replaceNameList <- function(namelist, datfile, vals){
     } else {
       postf <- ""
     }
-    browser()
+    
     # New namelist
     newlist <- formatNameList(namelist, vals)    
     
