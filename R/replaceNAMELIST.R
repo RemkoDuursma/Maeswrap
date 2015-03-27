@@ -95,10 +95,9 @@ formatNameList <- function(namelist, vals){
       listvals[i] <- paste(names(vals)[i],printme(vals[[i]], "\n"), 
                          sep=" = ")
     } else {
+      m <- vals[[i]]
       listvals[i] <- paste(names(vals)[i], paste(paste(apply(m,1,paste,collapse=" "), collapse="\n"),"\n"),
                            sep= " = ")
-      
-      
     }
     newlist <- c(paste0("&",namelist),
                  listvals, "/")
