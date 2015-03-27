@@ -75,7 +75,7 @@ replaceNameList <- function(namelist, datfile, vals){
     } else {
       postf <- ""
     }
-    
+    browser()
     # New namelist
     newlist <- formatNameList(namelist, vals)    
     
@@ -90,14 +90,24 @@ formatNameList <- function(namelist, vals){
   # New namelist
   listvals <- c()
   for(i in 1:length(vals)){
-    listvals[i] <- paste(names(vals)[i],printme(vals[[i]], "\n"), 
+    
+    if(!is.matrix(vals[[i]])){
+      listvals[i] <- paste(names(vals)[i],printme(vals[[i]], "\n"), 
                          sep=" = ")
+    } else {
+      listvals[i] <- paste(names(vals)[i], paste(paste(apply(m,1,paste,collapse=" "), collapse="\n"),"\n"),
+                           sep= " = ")
+      
+      
+    }
     newlist <- c(paste0("&",namelist),
                  listvals, "/")
   }
 
 return(newlist)
 }
+
+
 
 
 #'@rdname replacePAR
