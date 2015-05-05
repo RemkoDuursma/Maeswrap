@@ -64,8 +64,8 @@ randomstand <- function(LAI = 2,
   AC <- LAtree / ALAC
   cw <- CWfun(crownshape, AC, cwcl)
   cl <- cw / cwcl
-  
-  if(cl > height)height <- cl
+
+    if(cl > height)height <- cl
   hcb <- height - cl
   
   # used to set itargets

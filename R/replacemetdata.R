@@ -8,7 +8,7 @@ replacemetdata <- function (metdfr,
                             setdates=TRUE){
     
     metlines <- readLines(oldmetfile)
-    datastart <- grep("DATA START", metlines)
+    datastart <- grep("DATA START", metlines, ignore.case=TRUE)
     
     preamble <- readLines(oldmetfile)[1:datastart]
     
@@ -38,6 +38,10 @@ replacemetdata <- function (metdfr,
     
     if(!is.null(columns))
       replacePAR(newmetfile,"columns","metformat",columns,noquotes=TRUE)	
+    
+    g <- readLines(newmetfile,100)
+    g[grep("data start",g,ignore.case=TRUE)] <- "DATA STARTS"
+    writeLines(g,newmetfile)
     
     write.table(metdfr, newmetfile, sep = " ", row.names = FALSE, 
         col.names = FALSE, append = TRUE)

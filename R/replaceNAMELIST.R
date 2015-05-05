@@ -92,7 +92,7 @@ formatNameList <- function(namelist, vals){
   for(i in 1:length(vals)){
     
     if(!is.matrix(vals[[i]])){
-      listvals[i] <- paste(names(vals)[i],printme(vals[[i]], "\n"), 
+      listvals[i] <- paste(names(vals)[i],printme(vals[[i]]), 
                          sep=" = ")
     } else {
       m <- vals[[i]]
