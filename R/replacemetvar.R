@@ -49,7 +49,7 @@
 #' @export
 replacemetvar <- function(replacevar, newvalues, oldmetfile="met.dat", newmetfile="metNEW.dat"){
 	metlines <- readLines(oldmetfile)
-	datastart <- grep("DATA START", metlines)
+	datastart <- grep("DATA START", metlines, ignore.case=TRUE)
 	DATA <- read.table(oldmetfile, skip=datastart, header=FALSE)    
 	preamble <- readLines(oldmetfile)[1:datastart]
     namesloc <- grep("columns", tolower(metlines))

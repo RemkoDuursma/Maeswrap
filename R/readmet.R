@@ -24,7 +24,7 @@ readmet <- function(filename="met.dat", nlines=-1){
 	metlines <- readLines(filename)
 	namesloc <- grep("^columns",tolower(metlines))
 	namesline <- metlines[namesloc]
-	datastart <- grep("DATA STARTS", metlines)
+	datastart <- grep("DATA STARTS", metlines, ignore.case=TRUE)
 	sp <- strsplit(namesline, "=")[[1]][2]
 	NAMES <- delempty(str_trim(strsplit(sp, "\t")[[1]]))
 	NAMES <- gsub("'", "", NAMES)
