@@ -40,9 +40,6 @@
 #' @export
 readPAR <- function(datfile, parname, namelist=NA,fail=TRUE){
 
-  parname <- tolower(parname)
-  namelist <- tolower(namelist)
-  
   # Read entire file
   p <- parseFile(datfile)
   
@@ -51,7 +48,7 @@ readPAR <- function(datfile, parname, namelist=NA,fail=TRUE){
     res <- unlist(unname(lapply(p, "[[", parname)))
   } else {
     
-    if(!namelist %in% names(p) && fail)
+    if(!tolower(namelist) %in% tolower(names(p)) && fail)
       stop("Namelist ",namelist," not found")
     
     res <- p[[namelist]][[parname]]

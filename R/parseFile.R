@@ -22,7 +22,7 @@
 #' @export parseFile
 parseFile <- function(fn){
   
-  r <- str_trim(tolower(readLines(fn)))
+  r <- str_trim(readLines(fn))
   
   Title <- r[1]
   

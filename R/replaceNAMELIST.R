@@ -51,11 +51,10 @@
 replaceNameList <- function(namelist, datfile, vals){
     
     # Find NAMELIST and end of it ("/")
-    datlines <- str_trim(tolower(readLines(datfile)))
-	  namelist <- tolower(namelist)
+    datlines <- str_trim(readLines(datfile))
     nmreg <- paste0("&",namelist,"$")
 	
-    nl_start <- grep(nmreg, datlines)
+    nl_start <- grep(nmreg, datlines, ignore.case=TRUE)
     
     # Find nearest namelist closer ("/")
     endnml <- grep("^/$", datlines)

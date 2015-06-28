@@ -7,7 +7,7 @@ readNameList <- function(datfile, namelist){
   
   r <- str_trim(readLines(datfile))
   
-  nmStart <- grep(paste0("&",namelist), r, ignore.case=TRUE)
+  nmStart <- grep(paste0("&",namelist, "$"), r, ignore.case=TRUE)
   r <- r[nmStart[1]:length(r)]
   r <- r[1:grep("^/$",r)[1]]
   r <- r[-c(1,length(r))]
