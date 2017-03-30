@@ -167,10 +167,10 @@ Plotstand <- function(treesfile="trees.dat",
     whichvar <- indvar
     
     if(all(is.na(vals))){
-      vals <- rep(readPAR(treesfile, "values", allvar)[1], notrees)
+      vals <- rep(readPAR(treesfile, "values", allvar), notrees)
       whichvar <- allvar
     }
-      
+    
     # dates?
     ndates <- readPAR(treesfile, "nodates", whichvar)
     if(all(is.na(ndates)) || ndates==1)return(vals)
