@@ -1,3 +1,3 @@
 `delempty` <-
-function(x)x[str_trim(x) != ""]
+function(x)x[stringr::str_trim(x) != ""]
 
