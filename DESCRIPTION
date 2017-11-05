@@ -13,3 +13,4 @@ Description: A bundle of functions for modifying MAESTRA/MAESPA input files,
     sensitivity analyses, scenario analyses, etc.
 License: GPL
 LazyLoad: yes
+RoxygenNote: 6.0.1

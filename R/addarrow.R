@@ -1,4 +1,4 @@
-"addarrow" <- function(x0,y0,len,bearing,headlen=0.2*len,headangle=25,Nlabel=TRUE,
+addarrow <- function(x0,y0,len,bearing,headlen=0.2*len,headangle=25,Nlabel=TRUE,
 	addto=c('rgl','plot','lattice'),...){
 
 	addto <- match.arg(addto)
@@ -16,8 +16,8 @@
 	y3 <- y1 - headlen*sin(headangle - bearing)
 
 	if(addto=="rgl"){
-	 r <- require(rgl, quietly=TRUE)
-	 if(!r)stop("Install the rgl package\n")
+	 # r <- requireNamespace(rgl, quietly=TRUE)
+	 # if(!r)stop("Install the rgl package\n")
 	 rgl::lines3d(x = c(x0,x1), y=c(y0,y1), z=c(0,0), ...)
 	 rgl::lines3d(x = c(x1,x2), y=c(y1,y2), z=c(0,0), ...)
 	 rgl::lines3d(x = c(x1,x3), y=c(y1,y3), z=c(0,0), ...)

@@ -38,6 +38,7 @@
 #' }
 #' 
 #' @export
+#' @rdname readPAR
 readPAR <- function(datfile, parname, namelist=NA,fail=TRUE){
 
   # Read entire file
@@ -58,6 +59,36 @@ readPAR <- function(datfile, parname, namelist=NA,fail=TRUE){
   if(is.null(res) && !fail)res <- NA
   
   return(res)
+}
+
+
+#' @export
+#' @rdname readPAR
+readNameList <- function(datfile, namelist){
+  
+  r <- stringr::str_trim(readLines(datfile))
+  
+  nmStart <- grep(paste0("&",namelist, "$"), r, ignore.case=TRUE)
+  r <- r[nmStart[1]:length(r)]
+  r <- r[1:grep("^/$",r)[1]]
+  r <- r[-c(1,length(r))]
+  r <- delempty(r)
+  
+  # figure out which elements belong to which parameter.
+  parloc <- grep("=",r)
+  last <- length(r) - parloc[length(parloc)] + 1
+  nlines <- c(diff(parloc),last)
+  
+  l <- list()
+  for(i in 1:length(parloc)){
+    ind <- parloc[i]:(parloc[i] + nlines[i] -1)
+    l[[i]] <- parsePARline(r[ind])
+  }
+  
+  parnames <- stringr::str_trim(sapply(strsplit(r[parloc],"="), "[", 1))
+  names(l) <- tolower(parnames)
+  
+  return(l)
 }
 
 
