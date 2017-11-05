@@ -8,7 +8,7 @@ readuspar <- function(filename="uspar.dat"){
   colloc <- grep("Columns",watlines)
   namesline <- watlines[colloc]
   NAMES <- delempty(strsplit(strsplit(namesline, ":")[[1]][2], " ")[[1]])
-  uspar <- read.table(filename, header=FALSE, na.strings="-999.0000", skip=colloc)
+  uspar <- utils::read.table(filename, header=FALSE, na.strings="-999.0000", skip=colloc)
   names(uspar) <- NAMES
 
 return(uspar)

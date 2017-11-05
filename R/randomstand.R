@@ -1,5 +1,5 @@
 #' Generate a simple random stand of trees
-#' 
+#'
 #'@description Generates a stand of trees, given a LAI, stocking, and some basic allometry.
 #' Very simple implementation that will be expanded (and eventually rolled into
 #' Maes*).
@@ -9,12 +9,12 @@
 #' @param ALAC The ratio of tree leaf area to crown surface area (m2 m-2)
 #' @param stocking Number of trees per hectare
 #' @param edge An extra edge to be placed around the plot (in addition to plotsize!)
-#' @param plotsize The size of the plot (m), as a vector (x,y) 
+#' @param plotsize The size of the plot (m), as a vector (x,y)
 #' @param dbh Trunk diameter (not relevant, just for plotting) (m)
 #' @param crownshape One of the Maestra crown shapes
 #' @param path Path to the directory where the Maestra files should be modified
 #' @param maxnotrees Maximum number of target trees to be set in confile.dat (affects Maestra radiation calculations, not the plot and tree layout)
-#' @examples 
+#' @examples
 #' \dontrun{
 #' # Assuming your working directory contains the Maestra input files,
 #' randomstand()
@@ -31,35 +31,35 @@ randomstand <- function(LAI = 2,
                         dbh=0.3,
                         crownshape = c("ELIP","BOX","CONE","PARA","CYL"),
                         path = "",
-                        maxnotrees=25  
+                        maxnotrees=25
 ){
-  
+
   tf <- "trees.dat"
-  
+
   p <- parseFile(tf)
   if(!("indivlarea" %in% tolower(names(p))))
     stop("randomstand() only works if you have the INDIV* namelists in trees.dat (e.g. INDIVLAREA, not ALLLAREA)")
-  
+
   o <- getwd()
   on.exit(setwd(o))
   if(path != "")setwd(path)
-  
+
   stocking <- stocking / 10000 # convert to m-2
   crownshape <- match.arg(crownshape)
-  
+
   plotsize <- plotsize + 2*edge
   xmax <- plotsize[1]
   ymax <- plotsize[2]
   plotsize <- xmax * ymax
-  
-  
+
+
   ntrees <- floor(stocking * plotsize)
   LAtree <- LAI / stocking
-  
+
   # Random coordinates.
   # Could use a better one from sp package!
-  XY <- cbind(runif(ntrees, 0,xmax), runif(ntrees, 0,ymax))
-  
+  XY <- cbind(stats::runif(ntrees, 0,xmax), stats::runif(ntrees, 0,ymax))
+
   # Crown dimensions, based on total leaf area and width/length ratio of crown.
   AC <- LAtree / ALAC
   cw <- CWfun(crownshape, AC, cwcl)
@@ -67,10 +67,10 @@ randomstand <- function(LAI = 2,
 
     if(cl > height)height <- cl
   hcb <- height - cl
-  
+
   # used to set itargets
   whichinplot <- apply(XY, 1, function(x) (x[1] > edge & x[1] < (xmax-edge)) & (x[2] > edge & x[2] < (xmax-edge)))
-  
+
   # set trees.dat parameters
   replacePAR(tf,"xycoords","xy",XY)
   replacePAR(tf,"notrees","plot",floor(ntrees))
@@ -84,14 +84,14 @@ randomstand <- function(LAI = 2,
   replacePAR(tf,"ymax","plot",ymax)
   replacePAR(tf,"x0","plot",0)
   replacePAR(tf,"y0","plot",0)
-  
-  
+
+
   # set confile pars
   cf <- "confile.dat"
   replacePAR(cf, "itargets", "treescon", c(1:ntrees)[whichinplot])
   replacePAR(cf, "notrees", "treescon", min(ntrees,maxnotrees))
-  
-  
-  return(list(cl=cl,cw=cw,AC=AC,hcb=hcb,LAtree=LAtree))  
+
+
+  return(list(cl=cl,cw=cw,AC=AC,hcb=hcb,LAtree=LAtree))
 }
 
