@@ -2,6 +2,8 @@
 
 # The Maeswrap R package
 
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/Maeswrap)](https://cran.r-project.org/package=Maeswrap) [![](https://cranlogs.r-pkg.org/badges/grand-total/Maeswrap)](https://CRAN.R-project.org/package=Maeswrap) [![Bitbucket Issues](https://img.shields.io/bitbucket/issues/remkoduursma/Maeswrap.svg)](https://img.shields.io/bitbucket/issues/remkoduursma/Maeswrap.svg) [![Travis-CI Build Status](https://travis-ci.org/RemkoDuursma/Maeswrap.svg?branch=master)](https://travis-ci.org/RemkoDuursma/Maeswrap.svg?branch=master)
+
 This package is a collection of tools to work with the [Maespa model](maespa.github.io).
 
 Main functions:
