@@ -28,9 +28,6 @@
 #' higher values provide more detailed triangulation of the crowns, at the
 #' expense of speed.
 #'
-#' @details For large stands, the plot takes quite a while to complete. This code is far
-#' from optimized for speed, because I am patient. Also, minimize the rgl window to greatly speed it up.
-#'
 #' @param treesfile By default, the 'trees.dat' file in the current dir.
 #' @param strfile Not used, yet.
 #' @param crownshape Character,
@@ -41,27 +38,35 @@
 #' @param labcex Relative size of X and Y axis labels.
 #' @param axiscex Relative size of X and Y axis annotation.
 #' @param verbose If TRUE, writes more info to the screen while plotting.
-#' @param CL Crown length (m).
-#' @param CW Crown width (m).
 #' @param readstrfiles Read the 'str.dat' file(s) to find out crown shape?
 #' @param targethighlight Plot the target trees in red?
-#' @param crowncolor The color of the tree crowns. Default, obviously,
-#' 'forestgreen'.
-#' @param stemcolor The color of the tree stems. Default 'brown'.
-#' @param x0,y0,z0 Coordinates of crown base when calculating 3D coordinates.
-#' @param HCB Height of crown base (m).
-#' @param X,Y X- and Y-coordinates of tree stem base (m).
-#' @param dbh Stem diameter (m). Converted to m if appears to be in cm.
-#' @param nz Number of z divisions (increase number to get smoother crowns).
-#' @param nalpha Number of angular divisions (increase number to get smoother
-#' crowns).
-#' @param m 3xN matrix (x,y,z coordinates in rows).
 #' @param idate If multiple dates are provided for tree size variables, which
 #' one to display.
 #' @param path The folder where the input files are stored.
-#' @param \dots Further parameters passed (to plottree, or triangles3d).
+#' @param \dots See Details for a list of additional arguments recognized by \code{Plotstand}.
 #' @return An rgl device is opened.
 #' @author Remko Duursma
+#' 
+#' @details 
+#' 
+#' For large stands, the plot takes quite a while to complete. This implementation is certainly not optimized for speed.
+#' Also, minimize the rgl window to greatly speed up the plotting process.
+#'
+#' The \code{Plotstand} function accepts a number of additional arguments that are used by subsidiary functions, these are:
+#' 
+#' \enumerate{
+  #' \item \strong{CL}: Crown length (m).
+  #' \item \strong{CW}: Crown width (m).
+  #' \item \strong{crowncolor}: The color of the tree crowns. Default, obviously, forestgreen'.
+  #' \item \strong{stemcolor}: The color of the tree stems. Default 'brown'.
+  #' \item \strong{x0,y0,z0}: Coordinates of crown base when calculating 3D coordinates.
+  #' \item \strong{HCB}: Height of crown base (m).
+  #' \item \strong{X,Y}: X- and Y-coordinates of tree stem base (m).
+  #' \item \strong{dbh}: Stem diameter (m). Converted to m if appears to be in cm.
+  #' \item \strong{nz}: Number of z divisions (increase number to get smoother crowns).
+  #' \item \strong{nalpha}: Number of angular divisions (increase number to plot smoother crowns).
+  #' \item \strong{m}: 3xN matrix (x,y,z coordinates in rows). Optional.
+#' }
 #' @examples
 #'
 #'
