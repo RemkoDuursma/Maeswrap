@@ -11,7 +11,7 @@ missing sink or source.}
 checkwatbal(x = readwatbal(), usemeaset = FALSE)
 }
 \arguments{
-\item{x}{A dataframe returned by \code{\link{readwatbal}}.}
+\item{x}{A dataframe returned by \code{\link[=readwatbal]{readwatbal()}}.}
 
 \item{usemeaset}{Whether to use measured ET from the met file, or simulated
 (Default).}
@@ -24,7 +24,7 @@ debugging/checking tool: if the model has serious problems, there will be a
 missing sink or source.
 }
 \seealso{
-\code{\link{readwatbal}}
+\code{\link[=readwatbal]{readwatbal()}}
 }
 \author{
 Remko Duursma

@@ -3,13 +3,12 @@
 \name{plotuspar}
 \alias{plotuspar}
 \alias{readuspar}
-\alias{readuspar}
 \title{Plot the understorey PAR points}
 \usage{
 plotuspar(what = c("PARbeam", "PARtotal", "PARdiffuse", "APAR"),
   dataset = NULL, day = 1, hour = NA, xlim = NULL, ylim = NULL,
-  makepdf = FALSE, outputfile = "aparunderstorey.pdf", scaleeach = TRUE,
-  addNarrow = TRUE)
+  makepdf = FALSE, outputfile = "aparunderstorey.pdf",
+  scaleeach = TRUE, addNarrow = TRUE)
 
 readuspar(filename = "uspar.dat")
 }

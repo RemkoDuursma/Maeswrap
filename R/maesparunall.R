@@ -13,20 +13,20 @@
 #' (runmaestra) by default, but you can use others. See Examples on how to set
 #' this.
 #'
-#' Users will typically run \code{maesparunall}, which runs every row in the
-#' comma-separated file denoted by \code{runfile}. Every column in this runfile
+#' Users will typically run `maesparunall`, which runs every row in the
+#' comma-separated file denoted by `runfile`. Every column in this runfile
 #' is named, with the name corresponding not directly to a parameter or
 #' namelist in one of the fortran input files, but rather to an entry in the
-#' definition file. This file (argument \code{deffile}) needs to be in the
+#' definition file. This file (argument `deffile`) needs to be in the
 #' current workspace. It is a space (or tab)-separated file, with four columns:
 #' 'parname', 'fileparname', 'filename' and 'namelist'. An example of this file
 #' is provided with this package. Entries of each do not need to be quoted. The
 #' namelist entry can be left blank, but it is recommended to provide the
 #' namelist where the parameter occurs, for reliability.
 #'
-#' The default executable is \code{maespa.exe} when running \code{runmaespa},
-#' but others can of course be used.  The function \code{runmaestra} is exactly
-#' the same as \code{runmaespa}, except that the default is to use the
+#' The default executable is `maespa.exe` when running `runmaespa`,
+#' but others can of course be used.  The function `runmaestra` is exactly
+#' the same as `runmaespa`, except that the default is to use the
 #' executable 'maestra.exe'. To set the default for the rest of the session,
 #' see the last Example below.
 #'
@@ -53,7 +53,7 @@
 #' final values of soil water content and soil temperature are used to
 #' initialize the next run, which is the run that is reported.
 #' @param extrafiles Additional files to read and store (See Details).
-#' @param ... Further parameters passed to \code{runmaespa} or \code{readPAR}
+#' @param ... Further parameters passed to `runmaespa` or `readPAR`
 #' @return For runmaespa, nothing is returned. Assuming you used runit=TRUE,
 #' the model is run and output files are written to disk. The function
 #' maesparunall returns a list with two components: daily and hourly. These

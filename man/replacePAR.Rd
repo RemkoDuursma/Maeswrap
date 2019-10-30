@@ -63,7 +63,7 @@ replacePAR("trees.dat", "values", "indivlarea", newval=m)
 
 }
 \seealso{
-\code{\link{replacePAR}}
+\code{\link[=replacePAR]{replacePAR()}}
 }
 \author{
 Remko Duursma

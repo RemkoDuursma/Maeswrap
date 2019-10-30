@@ -5,11 +5,11 @@
 #' debugging/checking tool: if the model has serious problems, there will be a
 #' missing sink or source.
 #' 
-#' @param x A dataframe returned by \code{\link{readwatbal}}.
+#' @param x A dataframe returned by [readwatbal()].
 #' @param usemeaset Whether to use measured ET from the met file, or simulated
 #' (Default).
 #' @author Remko Duursma
-#' @seealso \code{\link{readwatbal}}
+#' @seealso [readwatbal()]
 #' @keywords misc
 #' @export
 checkwatbal <- function(x = readwatbal(), usemeaset=FALSE){

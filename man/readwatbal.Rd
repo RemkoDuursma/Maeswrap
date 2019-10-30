@@ -4,7 +4,7 @@
 \alias{readwatbal}
 \title{Reads the watbal.dat MAESPA output file}
 \usage{
-readwatbal(filename = "watbal.dat")
+readwatbal(filename = "watbal.dat", ...)
 }
 \arguments{
 \item{filename}{Default name of the (half-)hourly water balance output file.}

@@ -41,7 +41,7 @@ cat('I am so stressed, I need to eat', revchar('stressed'),'\\n')
 None.
 }
 \seealso{
-\code{\link{rev.default}},\code{\link{substr}},\code{\link{strsplit}}
+\code{\link[=rev.default]{rev.default()}},\code{\link[=substr]{substr()}},\code{\link[=strsplit]{strsplit()}}
 }
 \author{
 Remko Duursma

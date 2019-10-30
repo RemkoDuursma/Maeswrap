@@ -43,7 +43,7 @@
 #' @param idate If multiple dates are provided for tree size variables, which
 #' one to display.
 #' @param path The folder where the input files are stored.
-#' @param \dots See Details for a list of additional arguments recognized by \code{Plotstand}.
+#' @param \dots See Details for a list of additional arguments recognized by `Plotstand`.
 #' @return An rgl device is opened.
 #' @author Remko Duursma
 #' 
@@ -52,20 +52,20 @@
 #' For large stands, the plot takes quite a while to complete. This implementation is certainly not optimized for speed.
 #' Also, minimize the rgl window to greatly speed up the plotting process.
 #'
-#' The \code{Plotstand} function accepts a number of additional arguments that are used by subsidiary functions, these are:
+#' The `Plotstand` function accepts a number of additional arguments that are used by subsidiary functions, these are:
 #' 
 #' \enumerate{
-  #' \item \strong{CL}: Crown length (m).
-  #' \item \strong{CW}: Crown width (m).
-  #' \item \strong{crowncolor}: The color of the tree crowns. Default, obviously, forestgreen'.
-  #' \item \strong{stemcolor}: The color of the tree stems. Default 'brown'.
-  #' \item \strong{x0,y0,z0}: Coordinates of crown base when calculating 3D coordinates.
-  #' \item \strong{HCB}: Height of crown base (m).
-  #' \item \strong{X,Y}: X- and Y-coordinates of tree stem base (m).
-  #' \item \strong{dbh}: Stem diameter (m). Converted to m if appears to be in cm.
-  #' \item \strong{nz}: Number of z divisions (increase number to get smoother crowns).
-  #' \item \strong{nalpha}: Number of angular divisions (increase number to plot smoother crowns).
-  #' \item \strong{m}: 3xN matrix (x,y,z coordinates in rows). Optional.
+  #' \item **CL**: Crown length (m).
+  #' \item **CW**: Crown width (m).
+  #' \item **crowncolor**: The color of the tree crowns. Default, obviously, forestgreen'.
+  #' \item **stemcolor**: The color of the tree stems. Default 'brown'.
+  #' \item **x0,y0,z0**: Coordinates of crown base when calculating 3D coordinates.
+  #' \item **HCB**: Height of crown base (m).
+  #' \item **X,Y**: X- and Y-coordinates of tree stem base (m).
+  #' \item **dbh**: Stem diameter (m). Converted to m if appears to be in cm.
+  #' \item **nz**: Number of z divisions (increase number to get smoother crowns).
+  #' \item **nalpha**: Number of angular divisions (increase number to plot smoother crowns).
+  #' \item **m**: 3xN matrix (x,y,z coordinates in rows). Optional.
 #' }
 #' @examples
 #'

@@ -1,13 +1,13 @@
 #' Bundle of functions for modifying MAESTRA/MAESPA input files, and reading
 #' output files.
 #' 
-#' The main functions are \code{\link{runmaespa}} and
-#' \code{\link{maesparunall}}, see their help pages. Functions that read
+#' The main functions are [runmaespa()] and
+#' [maesparunall()], see their help pages. Functions that read
 #' parameters, and modify parameters or whole namelists are
-#' \code{\link{readPAR}}, \code{\link{replacePAR}},
-#' \code{\link{replaceNameList}}, and \code{\link{parseFile}} to read an entire
-#' file. Functions that read output are \code{\link{readdayflux}},
-#' \code{\link{readhrflux}}
+#' [readPAR()], [replacePAR()],
+#' [replaceNameList()], and [parseFile()] to read an entire
+#' file. Functions that read output are [readdayflux()],
+#' [readhrflux()]
 #' 
 #' \tabular{ll}{ Package: \tab Maeswrap\cr Type: \tab Package\cr Version: \tab
 #' 1.2\cr Date: \tab 2008-12-03\cr License: \tab GPL\cr LazyLoad: \tab yes\cr }
@@ -17,7 +17,7 @@
 #' @docType package
 #' @author Remko Duursma Maintainer: Remko Duursma <remkoduursma@@gmail.com>
 #' @references See Belinda Medlyn's MAESTRA homepage at:
-#' \url{http://www.bio.mq.edu.au/maestra/}
+#' <http://www.bio.mq.edu.au/maestra/>
 #' @keywords package
 NULL
 
@@ -34,7 +34,7 @@ NULL
 #' 
 #' @name maeswrapdefinitions
 #' @docType data
-#' @format A white space separated dataset (readable with \code{read.table}).
+#' @format A white space separated dataset (readable with `read.table`).
 #' @references None.
 #' @keywords datasets
 NULL
