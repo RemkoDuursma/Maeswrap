@@ -16,10 +16,10 @@
 #' mysim2 <- readhrflux()
 #' }
 #' @export
-readhrflux= function (filename = "hrflux.dat",...){
+readhrflux= function (filename = "hrflux.dat"){
   hrlines <- readLines(filename, n= 50)
   colloc <- grep("Columns", hrlines)
-  hrflux <- data.table::fread(filename, skip = colloc, na.strings = "NaN", data.table = F, ...)
+  hrflux <- data.table::fread(filename, skip = colloc, na.strings = "NaN", data.table = F)
   names(hrflux) <- delempty(strsplit(delempty(strsplit(hrlines[colloc], "Columns:")[[1]]), " ")[[1]])
   hrflux$conttime <- hrflux$DOY + hrflux$HOUR/max(hrflux$HOUR)
   

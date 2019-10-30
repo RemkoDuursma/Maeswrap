@@ -20,13 +20,13 @@
 #'
 #' }
 #' @export
-readwatbal <- function (filename = "watbal.dat",...){
+readwatbal <- function (filename = "watbal.dat"){
   watlines <- readLines(filename,100)
   colloc <- grep("Columns", watlines)
   namesline <- watlines[colloc]
   NAMES <- delempty(stringr::str_trim(strsplit(strsplit(namesline, ":")[[1]][2]," ")[[1]]))
   watbal <- data.table::fread(filename, header = FALSE, na.strings = "-999.0000", 
-                              skip = colloc+1, data.table = FALSE,...)
+                              skip = colloc+1, data.table = FALSE)
   names(watbal) <- NAMES
   return(watbal)
 }
@@ -59,7 +59,7 @@ readwatbalday <- function (filename = "watbalday.dat")
   watlines <- readLines(filename)
   colloc <- grep("Columns", watlines)
   namesline <- watlines[colloc]
-  NAMES <- delempty(trim(strsplit(strsplit(namesline, ":")[[1]][2]," ")[[1]]))
+  NAMES <- delempty(stringr::str_trim(strsplit(strsplit(namesline, ":")[[1]][2]," ")[[1]]))
   watbal <- data.table::fread(filename, header = FALSE, na.strings = "-999.0000",
                               skip = colloc, data.table = FALSE)
   names(watbal) <- NAMES

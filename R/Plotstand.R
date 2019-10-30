@@ -57,8 +57,8 @@
 #' \enumerate{
   #' \item **CL**: Crown length (m).
   #' \item **CW**: Crown width (m).
-  #' \item **crowncolor**: The color of the tree crowns. Default, obviously, forestgreen'.
-  #' \item **stemcolor**: The color of the tree stems. Default 'brown'.
+  #' \item **crowncolor**: The color of the tree crowns. Default, obviously, `forestgreen`.
+  #' \item **stemcolor**: The color of the tree stems. Default `brown`.
   #' \item **x0,y0,z0**: Coordinates of crown base when calculating 3D coordinates.
   #' \item **HCB**: Height of crown base (m).
   #' \item **X,Y**: X- and Y-coordinates of tree stem base (m).
