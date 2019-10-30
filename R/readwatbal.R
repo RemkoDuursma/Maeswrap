@@ -20,14 +20,17 @@
 #'
 #' }
 #' @export
-readwatbal <- function(filename="watbal.dat"){
-
-	watlines <- readLines(filename, 100)
-	colloc <- grep("Columns",watlines)
-	namesline <- watlines[colloc]
-	NAMES <- delempty(strsplit(strsplit(namesline, ":")[[1]][2], " ")[[1]])
-	watbal <- utils::read.table(filename, header=FALSE, na.strings="-999.0000", skip=colloc)
-	names(watbal) <- NAMES
-
-return(watbal)
+readwatbal <- function (filename = "watbal.dat",...){
+  
+  if(!require(data.table)){"Please download data.table package"}
+  watlines <- readLines(filename,100)
+  colloc <- grep("Columns", watlines)
+  namesline <- watlines[colloc]
+  NAMES <- delempty(trim(strsplit(strsplit(namesline, ":")[[1]][2],
+                                  " ")[[1]]))
+  watbal <- data.table::fread(filename, header = FALSE, na.strings = "-999.0000", 
+                              skip = colloc+1, data.table = F,...)
+  names(watbal) <- NAMES
+  return(watbal)
 }
+
