@@ -82,8 +82,8 @@ The \code{Plotstand} function accepts a number of additional arguments that are 
 \enumerate{
 \item \strong{CL}: Crown length (m).
 \item \strong{CW}: Crown width (m).
-\item \strong{crowncolor}: The color of the tree crowns. Default, obviously, forestgreen'.
-\item \strong{stemcolor}: The color of the tree stems. Default 'brown'.
+\item \strong{crowncolor}: The color of the tree crowns. Default, obviously, \code{forestgreen}.
+\item \strong{stemcolor}: The color of the tree stems. Default \code{brown}.
 \item \strong{x0,y0,z0}: Coordinates of crown base when calculating 3D coordinates.
 \item \strong{HCB}: Height of crown base (m).
 \item \strong{X,Y}: X- and Y-coordinates of tree stem base (m).

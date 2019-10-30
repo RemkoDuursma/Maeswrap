@@ -4,7 +4,7 @@
 \alias{readhrflux}
 \title{Reads the hrflux.dat MAESTRA/MAESPA output file}
 \usage{
-readhrflux(filename = "hrflux.dat", ...)
+readhrflux(filename = "hrflux.dat")
 }
 \arguments{
 \item{filename}{Default name of the (half-)hourly output file.}
