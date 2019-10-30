@@ -77,7 +77,7 @@ replacemetvar <- function(replacevar, newvalues, oldmetfile="met.dat", newmetfil
 replacemetdata <- function (metdfr,
                             oldmetfile = "met.dat",
                             columns=NULL,
-                            newmetfile = "met.dat",
+                            newmetfile = oldmetfile,
                             khrs=NA,
                             setdates=TRUE){
   
@@ -101,8 +101,9 @@ replacemetdata <- function (metdfr,
   if(setdates){
     startdate <- readPAR(oldmetfile,"startdate","metformat")
     startDate <- as.Date(startdate[1], "'%d/%m/%y'")
-    if(is.na(startDate))
+    if(is.na(startDate)){
       startDate <- as.Date(startdate[1], "%d/%m/%y")
+    }
     enddate <- startDate + N/khrs
     replacePAR(newmetfile, "enddate","metformat", format(enddate, "%d/%m/%y"))
   }
@@ -110,15 +111,15 @@ replacemetdata <- function (metdfr,
   replacePAR(newmetfile, "nocolumns","metformat", ncol(metdfr))
   replacePAR(newmetfile, "khrsperday","metformat", khrs)
   
-  if(!is.null(columns))
+  if(!is.null(columns)){
     replacePAR(newmetfile,"columns","metformat",columns,noquotes=TRUE)
+  }
   
   g <- readLines(newmetfile,100)
   g[grep("data start",g,ignore.case=TRUE)] <- "DATA STARTS"
   writeLines(g,newmetfile)
   
-  utils::write.table(metdfr, newmetfile, sep = " ", row.names = FALSE,
-                     col.names = FALSE, append = TRUE)
+  data.table::fwrite(metdfr,newmetfile,sep = " ",col.names = FALSE, append = TRUE)
 }
 
 

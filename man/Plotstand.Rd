@@ -5,10 +5,11 @@
 \title{Plot the stand in 3D}
 \usage{
 Plotstand(treesfile = "trees.dat", strfile = "str.dat",
-  crownshape = c("cone", "ellipsoid", "round", "halfellipsoid", "paraboloid",
-  "cylinder"), readstrfiles = TRUE, targethighlight = TRUE,
-  addNarrow = TRUE, xyaxes = TRUE, labcex = 1, axiscex = 1,
-  verbose = FALSE, idate = 1, path = "", ...)
+  crownshape = c("cone", "ellipsoid", "round", "halfellipsoid",
+  "paraboloid", "cylinder"), readstrfiles = TRUE,
+  targethighlight = TRUE, addNarrow = TRUE, xyaxes = TRUE,
+  labcex = 1, axiscex = 1, verbose = FALSE, idate = 1, path = "",
+  ...)
 }
 \arguments{
 \item{treesfile}{By default, the 'trees.dat' file in the current dir.}
@@ -47,7 +48,7 @@ An rgl device is opened.
 Reads the MAESTRA trees file, and plots the stand in 3D. Supports all
 MAESTRA crown shapes except the box shape.  Looks for the 'trees.dat' file
 in the current working directory, unless specified (see Examples).  The XY
-coordinates *must be present* in the 'trees.dat' file. Users will typically
+coordinates \emph{must be present} in the 'trees.dat' file. Users will typically
 only use the 'Plotstand' function.
 
 Optionally reads the crown shape from the 'str.dat' file, and plots the
@@ -81,8 +82,8 @@ The \code{Plotstand} function accepts a number of additional arguments that are 
 \enumerate{
 \item \strong{CL}: Crown length (m).
 \item \strong{CW}: Crown width (m).
-\item \strong{crowncolor}: The color of the tree crowns. Default, obviously, forestgreen'.
-\item \strong{stemcolor}: The color of the tree stems. Default 'brown'.
+\item \strong{crowncolor}: The color of the tree crowns. Default, obviously, \code{forestgreen}.
+\item \strong{stemcolor}: The color of the tree stems. Default \code{brown}.
 \item \strong{x0,y0,z0}: Coordinates of crown base when calculating 3D coordinates.
 \item \strong{HCB}: Height of crown base (m).
 \item \strong{X,Y}: X- and Y-coordinates of tree stem base (m).

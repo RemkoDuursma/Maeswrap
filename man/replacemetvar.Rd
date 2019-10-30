@@ -3,14 +3,13 @@
 \name{replacemetvar}
 \alias{replacemetvar}
 \alias{replacemetdata}
-\alias{replacemetdata}
 \title{Replace a weather variable}
 \usage{
 replacemetvar(replacevar, newvalues, oldmetfile = "met.dat",
   newmetfile = "metNEW.dat")
 
 replacemetdata(metdfr, oldmetfile = "met.dat", columns = NULL,
-  newmetfile = "met.dat", khrs = NA, setdates = TRUE)
+  newmetfile = oldmetfile, khrs = NA, setdates = TRUE)
 }
 \arguments{
 \item{replacevar}{Character. Name(s) of the variable to be replaced.}

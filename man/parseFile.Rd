@@ -30,5 +30,5 @@ names(con)
 
 }
 \seealso{
-To read one namelist from a file, see \code{\link{readNameList}}.
+To read one namelist from a file, see \code{\link[=readNameList]{readNameList()}}.
 }

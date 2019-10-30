@@ -7,13 +7,13 @@
 \title{Bundle of functions for modifying MAESTRA/MAESPA input files, and reading
 output files.}
 \description{
-The main functions are \code{\link{runmaespa}} and
-\code{\link{maesparunall}}, see their help pages. Functions that read
+The main functions are \code{\link[=runmaespa]{runmaespa()}} and
+\code{\link[=maesparunall]{maesparunall()}}, see their help pages. Functions that read
 parameters, and modify parameters or whole namelists are
-\code{\link{readPAR}}, \code{\link{replacePAR}},
-\code{\link{replaceNameList}}, and \code{\link{parseFile}} to read an entire
-file. Functions that read output are \code{\link{readdayflux}},
-\code{\link{readhrflux}}
+\code{\link[=readPAR]{readPAR()}}, \code{\link[=replacePAR]{replacePAR()}},
+\code{\link[=replaceNameList]{replaceNameList()}}, and \code{\link[=parseFile]{parseFile()}} to read an entire
+file. Functions that read output are \code{\link[=readdayflux]{readdayflux()}},
+\code{\link[=readhrflux]{readhrflux()}}
 }
 \details{
 \tabular{ll}{ Package: \tab Maeswrap\cr Type: \tab Package\cr Version: \tab
@@ -24,6 +24,6 @@ See Belinda Medlyn's MAESTRA homepage at:
 \url{http://www.bio.mq.edu.au/maestra/}
 }
 \author{
-Remko Duursma Maintainer: Remko Duursma <remkoduursma@gmail.com>
+Remko Duursma Maintainer: Remko Duursma \href{mailto:remkoduursma@gmail.com}{remkoduursma@gmail.com}
 }
 \keyword{package}

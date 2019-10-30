@@ -1,8 +1,8 @@
 #' Replaces a namelist or a parameter
 #'
-#' @description The function \code{replaceNameList} replaces the whole namelist in an input file.
+#' @description The function `replaceNameList` replaces the whole namelist in an input file.
 #' All parameters in the namelist must be provided, otherwise MAESTRA/MAESPA will likely crash. Or, you can use
-#' \code{replacePAR} to replace a single parameter. If the new parameter value(s) is a vector (or a single value), the values #' will be placed on a single line in the parameter file. If instead a matrix is provided, each row of the matrix is placed on a separate line.
+#' `replacePAR` to replace a single parameter. If the new parameter value(s) is a vector (or a single value), the values #' will be placed on a single line in the parameter file. If instead a matrix is provided, each row of the matrix is placed on a separate line.
 #'
 #' WARNING : The input file is modified. Make sure to backup your original
 #' input files!
@@ -18,7 +18,7 @@
 #' values.
 #' @return Nothing is returned. The input file is modified.
 #' @author Remko Duursma
-#' @seealso \code{\link{replacePAR}}
+#' @seealso [replacePAR()]
 #' @keywords utilities
 #' @examples
 #'

@@ -1,11 +1,11 @@
 #' Reads the value of a parameter in a MAESTRA/MAESPA input file.
 #' 
-#' @description The \code{readPAR} function reads the value of any parameter in a namelist
+#' @description The `readPAR` function reads the value of any parameter in a namelist
 #' in one of the MAESTRA/MAESPA input files.  Also works for other text files
 #' that have the FORTRAN namelist input structure.  Optionally specifies in
 #' which namelist to look for the parameter.
 #' 
-#' To read an entire namelist into a list, use the \code{readNameList}
+#' To read an entire namelist into a list, use the `readNameList`
 #' function.
 #' 
 #' 
@@ -15,12 +15,12 @@
 #' @param namelist The namelist to look in, otherwise looks in the whole file.
 #' @param fail Logical. If TRUE, stops with an error when parameter is not
 #' found (if FALSE, returns NA)
-#' @return For \code{readPAR}, either one value, or a vector, depending on how
+#' @return For `readPAR`, either one value, or a vector, depending on how
 #' many values are specified for the parameter in the input file.
 #' 
-#' For \code{readNameList}, a named list.
+#' For `readNameList`, a named list.
 #' @author Remko Duursma. Thanks to Andreas Ibrom for reporting a bug.
-#' @seealso \code{\link{replacePAR}}, \code{\link{readNameList}}
+#' @seealso [replacePAR()], [readNameList()]
 #' @keywords utilities
 #' @examples
 #' 
@@ -76,6 +76,7 @@ readNameList <- function(datfile, namelist){
   
   # figure out which elements belong to which parameter.
   parloc <- grep("=",r)
+
   last <- length(r) - parloc[length(parloc)] + 1
   nlines <- c(diff(parloc),last)
   

@@ -3,7 +3,6 @@
 \name{readPAR}
 \alias{readPAR}
 \alias{readNameList}
-\alias{readNameList}
 \title{Reads the value of a parameter in a MAESTRA/MAESPA input file.}
 \usage{
 readPAR(datfile, parname, namelist = NA, fail = TRUE)
@@ -52,7 +51,7 @@ readNameList("trees.dat", "plot")
 
 }
 \seealso{
-\code{\link{replacePAR}}, \code{\link{readNameList}}
+\code{\link[=replacePAR]{replacePAR()}}, \code{\link[=readNameList]{readNameList()}}
 }
 \author{
 Remko Duursma. Thanks to Andreas Ibrom for reporting a bug.

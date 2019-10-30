@@ -30,4 +30,6 @@ or install the development version via:
 
 ```
 devtools::install_github("RemkoDuursma/Maeswrap")
+# Or if you don't have devtools: 
+remotes::install_github("RemkoDuursma/Maeswrap")
 ```

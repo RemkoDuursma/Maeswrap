@@ -10,7 +10,7 @@
 #' @return A vector.
 #' @author Remko Duursma
 #' @seealso
-#' \code{\link{rev.default}},\code{\link{substr}},\code{\link{strsplit}}
+#' [rev.default()],[substr()],[strsplit()]
 #' @references None.
 #' @keywords methods
 #' @examples
